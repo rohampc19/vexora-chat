@@ -6,7 +6,6 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const readline = require("readline");
 
 // Force UTF-8 output so non-ASCII text does not render as boxes
 try { require("child_process").execSync("chcp 65001 >nul", { shell: "cmd.exe" }); } catch {}
@@ -23,6 +22,17 @@ const SESSION_MAX_AGE = 86400;
 function rateLimit(req, key, max = 60, windowMs = 60000) { const now = Date.now(); const address = String(req.socket.remoteAddress || "local").replace(/^::ffff:/, ""); const bucketKey = `${address}:${key}`; const bucket = rateBuckets.get(bucketKey) || { start: now, count: 0 }; if (now - bucket.start > windowMs) { bucket.start = now; bucket.count = 0; } bucket.count += 1; rateBuckets.set(bucketKey, bucket); if (rateBuckets.size > 10000) for (const [entry, value] of rateBuckets) if (now - value.start > windowMs) rateBuckets.delete(entry); return bucket.count <= max; }
 function sessionCookie(value, maxAge = SESSION_MAX_AGE) { const secure = process.env.NODE_ENV === "production" ? "; Secure" : ""; return `vexora_session=${encodeURIComponent(value)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${maxAge}${secure}`; }
 function hashPasswordSync(password) { const salt = crypto.randomBytes(16); const derived = crypto.pbkdf2Sync(String(password), salt, 120000, 32, "sha256"); return `pbkdf2$120000$${salt.toString("hex")}$${derived.toString("hex")}`; }
+function bootstrapAdminPassword() {
+  if (process.env.ADMIN_PASSWORD_HASH) return process.env.ADMIN_PASSWORD_HASH;
+  const generated = crypto.randomBytes(9).toString("base64url");
+  console.log("\n==============================================");
+  console.log("[SETUP] هیچ ADMIN_PASSWORD_HASH ست نشده. یک پسورد موقت ادمین ساخته شد:");
+  console.log("[SETUP] username: admin");
+  console.log(`[SETUP] password: ${generated}`);
+  console.log("[SETUP] همین الان ذخیره‌اش کن — دوباره نشون داده نمیشه. برای پسورد ثابت، ADMIN_PASSWORD_HASH رو توی .env تنظیم کن.");
+  console.log("==============================================\n");
+  return hashPasswordSync(generated);
+}
 function hashPassword(password) {
   return new Promise((resolve, reject) => {
     const salt = crypto.randomBytes(16);
@@ -45,7 +55,7 @@ function sameOrigin(req) { const origin = String(req.headers.origin || ""); cons
 
 const initialData = {
   users: [
-    { id: "u-admin", username: "admin", name: "ادمین", password: "pbkdf2$120000$1cfa358b396157cca9cac33215d08203$9ce47681924e7ac2080c43876859289fd2196bc4097708c48604813c0885eb38", score: 9999, favoriteGame: "—", avatar: "A", role: "admin", status: "approved", friends: [] }
+    { id: "u-admin", username: "admin", name: "ادمین", password: bootstrapAdminPassword(), score: 9999, favoriteGame: "—", avatar: "A", role: "admin", status: "approved", friends: [] }
   ],
   messages: [],
   communityMessages: [],
@@ -79,7 +89,8 @@ function normalizeLikeData(data) {
 }
 function loadData() { try { const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf8")); let changed = false; if (!Array.isArray(data.news) || !data.news.length) { data.news = structuredClone(seedNews); changed = true; } data.groups = Array.isArray(data.groups) ? data.groups : []; data.groupMembers = Array.isArray(data.groupMembers) ? data.groupMembers : []; data.groupMessages = Array.isArray(data.groupMessages) ? data.groupMessages : []; data.groupJoinRequests = Array.isArray(data.groupJoinRequests) ? data.groupJoinRequests : []; if (process.env.NODE_ENV !== "production" && !data.groups.some(group => group.name === "VEXORA TEST GROUP")) { const now = new Date().toISOString(); const testGroup = { id: "group-vexora-test", name: "VEXORA TEST GROUP", description: "گروه آزمایشی برای تست سیستم گروه‌های VEXORA CHAT", avatar: "", type: "public", leaderId: "u-admin", maxMembers: 50, createdAt: now, updatedAt: now }; data.groups.push(testGroup); data.groupMembers.push({ id: "gm-vexora-test-admin", groupId: testGroup.id, userId: "u-admin", role: "leader", joinedAt: now }); changed = true; } data.sessions = Array.isArray(data.sessions) ? data.sessions.filter(session => Date.now() - new Date(session.createdAt).getTime() < 86400000) : []; data.reports = Array.isArray(data.reports) ? data.reports : []; data.users = Array.isArray(data.users) ? data.users : []; const usernames = new Set(); data.users.forEach(user => { const normalized = String(user.username || "").trim().toLowerCase(); if (user.username !== normalized) { user.username = normalized; changed = true; } if (user.password && !String(user.password).startsWith("pbkdf2$") && !String(user.password).startsWith("scrypt$")) { user.password = hashPasswordSync(user.password); changed = true; } if (usernames.has(normalized)) throw new Error("Duplicate username in database"); usernames.add(normalized); }); if (normalizeLikeData(data)) changed = true; if (changed) saveData(data); return data; } catch { const data = structuredClone(initialData); data.news = structuredClone(seedNews); return data; } }
 function saveData(data) { fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), "utf8"); }
-function securityHeaders() { return { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer", "X-Frame-Options": "DENY", "Cross-Origin-Opener-Policy": "same-origin", "Cross-Origin-Resource-Policy": "same-origin", "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()", "Content-Security-Policy": "default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'" }; }
+function injectNonce(html, nonce) { return html.replace(/<script(\s[^>]*)?>/gi, (match, attrs = "") => { if (/\bsrc\s*=/i.test(attrs)) return match; return `<script nonce="${nonce}"${attrs}>`; }); }
+function securityHeaders(nonce) { const scriptSrc = nonce ? `'self' 'nonce-${nonce}'` : "'self'"; return { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer", "X-Frame-Options": "DENY", "Cross-Origin-Opener-Policy": "same-origin", "Cross-Origin-Resource-Policy": "same-origin", "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()", "Content-Security-Policy": `default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src ${scriptSrc}; img-src 'self' data: blob:; connect-src 'self'` }; }
 function reply(res, code, body, extraHeaders = {}) { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8", ...securityHeaders(), ...extraHeaders }); res.end(JSON.stringify(body)); }
 function readBody(req) { return new Promise((resolve, reject) => { let value = ""; let tooLarge = false; let settled = false; const fail = error => { if (settled) return; settled = true; reject(error); }; req.on("data", chunk => { if (tooLarge || settled) return; value += chunk; if (value.length > 1e6) { tooLarge = true; fail(new Error("بدنهٔ درخواست بیش از حد مجاز است.")); req.destroy(); } }); req.on("end", () => { if (tooLarge || settled) return; try { settled = true; resolve(value ? JSON.parse(value) : {}); } catch { fail(new Error("بدنهٔ درخواست نامعتبر است.")); } }); req.on("error", fail); }); }
 function token() { return crypto.randomBytes(32).toString("hex"); }
@@ -113,34 +124,6 @@ function groupById(data, id) { return data.groups.find(group => group.id === id)
 function groupMember(data, groupId, userId) { return data.groupMembers.find(member => member.groupId === groupId && member.userId === userId); }
 function groupView(data, group, viewer) { const leader = data.users.find(user => user.id === group.leaderId); const members = data.groupMembers.filter(member => member.groupId === group.id).map(member => { const user = data.users.find(item => item.id === member.userId); return { ...member, username: user?.username || "کاربر", name: user?.name || user?.username || "کاربر", avatar: user?.avatar || user?.username?.[0] || "؟" }; }); return { ...group, leader: leader ? { id: leader.id, username: leader.username, name: leader.name, avatar: leader.avatar } : null, members, memberCount: members.length, isMember: !!viewer && members.some(member => member.userId === viewer.id), isLeader: !!viewer && group.leaderId === viewer.id, pendingRequest: !!viewer && data.groupJoinRequests.some(request => request.groupId === group.id && request.userId === viewer.id && request.status === "pending") }; }
 function groupIdParam(url) { const match = url.pathname.match(/^\/api\/groups\/([^/]+)/); return match ? decodeURIComponent(match[1]) : null; }
-
-/* Registration approval from the terminal - y: approve, n: reject */
-const rl = process.stdin.isTTY
-  ? readline.createInterface({ input: process.stdin, output: process.stdout, prompt: "" })
-  : null;
-if (rl) rl.on("SIGINT", () => { rl.close(); process.exit(0); });
-function askRegistration(username) {
-  if (!rl) {
-    console.log("[INFO] Pending registration: " + username + " (approve from admin-panel.html)");
-    return;
-  }
-  process.stdout.write("\n[NEW] New registration request: \"" + username + "\"\nApprove? (y = approve / n = reject): ");
-  rl.once("line", answer => {
-    const data = loadData();
-    const user = data.users.find(u => u.username === username && u.status === "pending");
-    if (!user) { console.log("[!] This request no longer exists."); return; }
-    if (answer.trim().toLowerCase() === "y") {
-      user.status = "approved";
-      notify(data, username, "approved", "admin", "Your registration was approved. Welcome!");
-      saveData(data);
-      console.log("\n[OK] Approved! User \"" + username + "\" can now log in.");
-    } else {
-      data.users = data.users.filter(u => u.username !== username);
-      saveData(data);
-      console.log("[X] Request for \"" + username + "\" was rejected and removed.");
-    }
-  });
-}
 
 async function api(req, res, url) {
   const bucket = url.pathname.startsWith("/api/login") ? "login" : url.pathname.startsWith("/api/register") ? "register" : "api";
@@ -192,10 +175,7 @@ async function api(req, res, url) {
   if (req.method === "GET" && url.pathname === "/api/register/status") { const username = (url.searchParams.get("username") || "").trim().toLowerCase(); const user = data.users.find(u => u.username === username); if (!user) return reply(res, 200, { status: "rejected" }); let value = null; if (user.status === "approved") { value = token(); data.sessions.push({ token: value, userId: user.id, createdAt: new Date().toISOString() }); saveData(data); } return reply(res, 200, { status: user.status, user: user.status === "approved" ? publicUser(user) : null }, value ? { "Set-Cookie": sessionCookie(value) } : {}); }
   if (req.method === "GET" && url.pathname === "/api/friends") { const viewer = requireUser(data, req, res); if (!viewer) return; const list = friendsOf(data, viewer.username).map(username => data.users.find(item => item.username === username && item.status === "approved")).filter(Boolean).map(publicUser).map(user => { const last = lastMessageOf(data, viewer.username, user.username); const unread = (data.messages || []).filter(m => m.conversation === viewer.username && m.sender === user.username && !m.read).length; return { ...user, lastMessage: last ? last.text : "", lastMessageTime: last ? last.createdAt : null, unread, online: ((Date.now() - new Date(last ? last.createdAt : 0).getTime()) < 120000 && last && last.sender === user.username) }; }).sort((a, b) => new Date(b.lastMessageTime || 0) - new Date(a.lastMessageTime || 0)); return reply(res, 200, { friends: list }); }
   if (req.method === "POST" && url.pathname === "/api/friends") { const viewer = requireUser(data, req, res); if (!viewer) return; const body = await readBody(req); const playerId = String(body.playerId || "").trim().toLowerCase().replace(/^@/, ""); if (!playerId) return reply(res, 400, { error: "آیدی بازیکن را وارد کنید." }); const target = data.users.find(item => item.username.toLowerCase() === playerId && item.status === "approved"); if (!target) return reply(res, 404, { error: "بازیکنی با این آیدی پیدا نشد." }); if (target.username === viewer.username) return reply(res, 400, { error: "نمی‌توانی خودت را اضافه کنی." }); if (isFriend(data, viewer.username, target.username)) return reply(res, 409, { error: "این بازیکن قبلاً در فهرست دوستانت است." }); viewer.friends = Array.isArray(viewer.friends) ? viewer.friends : []; target.friends = Array.isArray(target.friends) ? target.friends : []; viewer.friends.push(target.username); target.friends.push(viewer.username); notify(data, target.username, "friend", viewer.username, "@" + viewer.username + " تو را به فهرست دوستان اضافه کرد."); saveData(data); console.log(`[CHAT] Friend added | by=${viewer.username} | target=${target.username}`); return reply(res, 201, { friend: { ...publicUser(target), lastMessage: "", lastMessageTime: null, unread: 0, online: false } }); }
-  if (req.method === "POST" && url.pathname === "/api/register") { const body = await readBody(req); const usernameResult = validateUsername(body.username); const username = usernameResult.username; const password = String(body.password || ""); const passwordError = validatePassword(password, body.confirmPassword); if (usernameResult.error) return reply(res, 400, { error: usernameResult.error }); if (passwordError) return reply(res, 400, { error: passwordError }); if (data.users.some(u => String(u.username || "").toLowerCase() === username) || pendingUsernames.has(username)) return reply(res, 409, { error: "این نام کاربری قبلاً استفاده شده است." }); pendingUsernames.add(username); try { const passwordHash = await hashPassword(password); const latestData = loadData(); if (latestData.users.some(u => String(u.username || "").toLowerCase() === username)) return reply(res, 409, { error: "این نام کاربری قبلاً استفاده شده است." }); const user = { id: `u-${crypto.randomUUID()}`, username, name: username, password: passwordHash, score: 0, favoriteGame: "—", avatar: username[0].toUpperCase(), status: "pending", friends: [] }; latestData.users.push(user); saveData(latestData);
-  const createdUser = latestData.users.find(item => item.username === username);
-  console.log(`[AUTH] New user registered | username=${username} | userId=${createdUser.id} | status=PENDING`);
-  askRegistration(username); return reply(res, 201, { user: publicUser(createdUser), pending: true, message: "ثبت‌نام انجام شد؛ بزودی ورود شما توسط ادمین تایید خواهد شد." }); } finally { pendingUsernames.delete(username); } }
+  if (req.method === "POST" && url.pathname === "/api/register") { const body = await readBody(req); const usernameResult = validateUsername(body.username); const username = usernameResult.username; const password = String(body.password || ""); const passwordError = validatePassword(password, body.confirmPassword); if (usernameResult.error) return reply(res, 400, { error: usernameResult.error }); if (passwordError) return reply(res, 400, { error: passwordError }); if (data.users.some(u => String(u.username || "").toLowerCase() === username) || pendingUsernames.has(username)) return reply(res, 409, { error: "این نام کاربری قبلاً استفاده شده است." }); pendingUsernames.add(username); try { const passwordHash = await hashPassword(password); const latestData = loadData(); if (latestData.users.some(u => String(u.username || "").toLowerCase() === username)) return reply(res, 409, { error: "این نام کاربری قبلاً استفاده شده است." }); const user = { id: `u-${crypto.randomUUID()}`, username, name: username, password: passwordHash, score: 0, favoriteGame: "—", avatar: username[0].toUpperCase(), status: "approved", friends: [] }; latestData.users.push(user); const createdUser = latestData.users.find(item => item.username === username); const sessionValue = token(); latestData.sessions.push({ token: sessionValue, userId: createdUser.id, createdAt: new Date().toISOString() }); saveData(latestData); console.log(`[AUTH] New user registered | username=${username} | userId=${createdUser.id} | status=APPROVED (auto)`); return reply(res, 201, { user: publicUser(createdUser), pending: false }, { "Set-Cookie": sessionCookie(sessionValue) }); } finally { pendingUsernames.delete(username); } }
   if (req.method === "GET" && url.pathname === "/api/admin/pending") { const admin = requireAdmin(data, req, res); if (!admin) return; return reply(res, 200, { pending: data.users.filter(u => u.status === "pending").map(publicUser) }); }
   if (req.method === "POST" && url.pathname === "/api/admin/approve") { const admin = requireAdmin(data, req, res); if (!admin) return; const body = await readBody(req); const username = String(body.username || "").toLowerCase(); const user = data.users.find(u => u.username === username); if (!user) return reply(res, 404, { error: "کاربر پیدا نشد." }); if (body.reject === true) { data.users = data.users.filter(u => u.username !== username); saveData(data); return reply(res, 200, { rejected: true }); } user.status = "approved"; notify(data, username, "approved", "admin", "ثبت‌نام شما تایید شد؛ خوش آمدی! 🎮"); saveData(data); return reply(res, 200, { approved: true, user: publicUser(user) }); }
   if (url.pathname === "/api/admin/stats" && req.method === "GET") { const admin = requireAdmin(data, req, res); if (!admin) return; return reply(res, 200, { stats: { users: data.users.length, pendingUsers: data.users.filter(user => user.status === "pending").length, news: (data.news || []).length, publishedNews: (data.news || []).filter(item => item.status !== "draft").length, drafts: (data.news || []).filter(item => item.status === "draft").length, messages: (data.messages || []).length } }); }
@@ -227,16 +207,20 @@ const server = http.createServer(async (req, res) => {
     const file = path.resolve(ROOT, `.${requested}`);
     const relative = path.relative(ROOT, file);
     if (relative.startsWith("..") || path.isAbsolute(relative) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end("Not found"); }
-    res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream", ...securityHeaders(), ...(process.env.NODE_ENV === "production" ? { "Strict-Transport-Security": "max-age=31536000; includeSubDomains" } : {}) });
+    const ext = path.extname(file).toLowerCase();
+    const prodHeaders = process.env.NODE_ENV === "production" ? { "Strict-Transport-Security": "max-age=31536000; includeSubDomains" } : {};
+    if (ext === ".html") {
+      const nonce = crypto.randomBytes(16).toString("base64");
+      const html = fs.readFileSync(file, "utf8");
+      const injected = injectNonce(html, nonce);
+      res.writeHead(200, { "Content-Type": MIME[ext], ...securityHeaders(nonce), ...prodHeaders });
+      return res.end(injected);
+    }
+    res.writeHead(200, { "Content-Type": MIME[ext] || "application/octet-stream", ...securityHeaders(), ...prodHeaders });
     fs.createReadStream(file).on("error", () => { if (!res.headersSent) reply(res, 404, { error: "فایل پیدا نشد." }); }).pipe(res);
   } catch (error) { if (!res.headersSent) reply(res, 400, { error: "درخواست نامعتبر است." }); }
 });
 /* بدون قفل‌شدن روی IPv4 یا IPv6، هر دو آدرس localhost و 127.0.0.1 را قبول کن. */
 server.listen(PORT, "::", () => {
   console.log(`Local server is running at http://localhost:${PORT}`);
-  console.log("Pending registrations can be approved from admin-panel.html.");
-  if (rl) {
-    const pend = loadData().users.filter(u => u.status === "pending");
-    pend.forEach(u => askRegistration(u.username));
-  }
 });
