@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VEXORA CHAT — جامعه گیمرها</title>
+<meta name="description" content="پلتفرم اجتماعی و گیمینگ فارسی VEXORA CHAT">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ============ APP SHELL ============ -->
+<div class="app-shell" id="app">
+
+  <!-- ===== DESKTOP TOP NAV ===== -->
+  <nav class="topnav">
+    <div class="vexora-logo">
+      <div class="vexora-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 3 L12 21 L18 3 M9 12 L15 12"/>
+        </svg>
+      </div>
+      <span class="vexora-logo-text">VEXORA</span>
+    </div>
+
+    <div class="topnav-center">
+      <a href="#" class="topnav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+        خانه
+      </a>
+      <a href="#" class="topnav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        بازی‌ها
+      </a>
+      <a href="#" class="topnav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        دوستان
+      </a>
+      <a href="#" class="topnav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15 1.65 1.65 0 003.17 14H3a2 2 0 010-4h.09A1.65 1.65 0 004.68 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        تنظیمات
+      </a>
+    </div>
+
+    <div class="topnav-actions">
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="جستجو در VEXORA...">
+      </label>
+
+      <button class="icon-btn" id="notifBtn" aria-label="اعلان‌ها">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-dot"></span>
+      </button>
+
+      <button class="avatar" id="profileBtn" aria-label="پروفایل">
+        <img src="https://ui-avatars.com/api/?name=علی&background=7C5CFF&color=fff" alt="آواتار کاربر">
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-container">
+
+    <!-- ---- FEED COLUMN ---- -->
+    <section class="feed-col">
+
+      <!-- Create Post -->
+      <div class="card" style="margin-bottom: var(--space-4);">
+        <div style="display:flex; gap:var(--space-3); align-items:center;">
+          <div class="avatar">
+            <img src="https://ui-avatars.com/api/?name=علی&background=7C5CFF&color=fff" alt="">
+          </div>
+          <button class="form-input" style="text-align:right; color: var(--text-muted); cursor:pointer;" id="openComposer">
+            امروز چه بازی‌ای کردی؟ برای بچه‌ها تعریف کن...
+          </button>
+          <button class="btn btn-primary" id="publishBtn">انتشار</button>
+        </div>
+      </div>
+
+      <!-- Feed Posts (Dynamic - filled by app.js) -->
+      <div id="feedContainer">
+        <!-- Skeleton loading placeholder -->
+        <div class="post-card">
+          <div class="skeleton" style="height:20px; width:40%; margin-bottom:12px;"></div>
+          <div class="skeleton" style="height:60px; width:100%;"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ---- SIDEBAR ---- -->
+    <aside class="sidebar-col">
+
+      <div class="card">
+        <div class="sidebar-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.9 6.6L22 9.3l-5 4.9 1.2 7.1L12 17.8l-6.2 3.5L7 14.2 2 9.3l7.1-.7z"/></svg>
+          برترین‌های امروز
+        </div>
+        <div id="leaderboardContainer">
+          <div class="leader-row">
+            <div class="leader-rank gold">۱</div>
+            <div class="leader-info"><div class="leader-name">speedrunner</div><div class="leader-score">۱۵,۰۰۰ امتیاز</div></div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank silver">۲</div>
+            <div class="leader-info"><div class="leader-name">puzzle_master</div><div class="leader-score">۸,۵۰۰ امتیاز</div></div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank bronze">۳</div>
+            <div class="leader-info"><div class="leader-name">gaming_hero</div><div class="leader-score">۵,۰۰۰ امتیاز</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sidebar-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg>
+          دوستان آنلاین
+        </div>
+        <div id="onlineFriendsContainer">
+          <div class="friend-row">
+            <div class="avatar"><img src="https://ui-avatars.com/api/?name=فاطمه&background=FF3D81&color=fff" alt=""></div>
+            <div class="leader-info"><div class="leader-name">puzzle_master</div></div>
+            <div class="online-dot"></div>
+          </div>
+          <div class="friend-row">
+            <div class="avatar"><img src="https://ui-avatars.com/api/?name=محمد&background=2DD4BF&color=fff" alt=""></div>
+            <div class="leader-info"><div class="leader-name">speedrunner</div></div>
+            <div class="online-dot"></div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ===== MOBILE BOTTOM NAV ===== -->
+  <nav class="bottomnav">
+    <a href="#" class="bottomnav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+      خانه
+    </a>
+    <a href="#" class="bottomnav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      بازی‌ها
+    </a>
+    <button class="bottomnav-fab" id="mobileComposeBtn" aria-label="پست جدید">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <a href="#" class="bottomnav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      اعلان‌ها
+    </a>
+    <a href="#" class="bottomnav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+      پروفایل
+    </a>
+  </nav>
+
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
