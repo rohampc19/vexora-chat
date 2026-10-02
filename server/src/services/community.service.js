@@ -35,10 +35,10 @@ export async function likePost(userId,postId){
 }
 
 export async function comments(postId){
-  const r=await pool.query(`select pc.id,pc.text,pc.created_at,u.username,u.display_name,u.avatar_url,
+  const r=await pool.query(`select pc.id,pc.text,pc.created_at,u.username,u.display_name,u.avatar_url,u.is_premium,
     (select count(*) from comment_likes cl where cl.comment_id=pc.id)::int likes
     from post_comments pc join users u on u.id=pc.user_id where pc.post_id=$1 order by pc.created_at desc`,[postId]);
-  return r.rows.map(x=>({id:x.id,text:x.text,createdAt:x.created_at,author:{username:x.username,displayName:x.display_name,avatarUrl:x.avatar_url},likes:Number(x.likes)}));
+  return r.rows.map(x=>({id:x.id,text:x.text,createdAt:x.created_at,author:{username:x.username,displayName:x.display_name,avatarUrl:x.avatar_url,isPremium:!!x.is_premium},likes:Number(x.likes)}));
 }
 
 export async function addComment(userId,postId,text){
