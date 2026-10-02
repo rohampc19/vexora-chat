@@ -1,0 +1,4 @@
+import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..','..');
+test('monetization backend structure exists',()=>{for(const p of ['database/migrations/003_monetization.sql','server/src/config/monetization.js','server/src/services/monetization.service.js','server/src/controllers/monetization.controller.js','server/src/routes/monetization.routes.js','client/src/pages/Monetization.jsx','client/src/pages/Wallet.jsx','client/src/pages/CustomizeProfile.jsx'])expect(fs.existsSync(path.join(root,p))).toBe(true)});
+test('migration contains server-authoritative financial tables',()=>{const s=fs.readFileSync(path.join(root,'database/migrations/003_monetization.sql'),'utf8');for(const x of ['wallets','inventory','wallet_transactions','payment_intents','monetization_plans','coin_packages','profile_customization'])expect(s).toContain('create table if not exists '+x)});
