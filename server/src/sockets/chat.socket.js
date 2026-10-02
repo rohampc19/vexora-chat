@@ -31,6 +31,27 @@ export function registerChat(io){
     Presence.findOneAndUpdate({username:u.username},{online:true,lastSeen:new Date()},{upsert:true,new:true}).catch(()=>{});
     io.emit('presence:update',{username:u.username,online:true});
 
+    socket.on('global:send',async({text}={})=>{
+      try{
+        if(!allowMessage())throw new Error('تعداد پیام‌ها در این لحظه زیاد است؛ چند ثانیه بعد دوباره تلاش کن.');
+        const raw=String(text??'');const clean=cleanText(raw);
+        if(!clean||raw.length>2000)throw new Error('پیام نامعتبر است.');
+        const msg=await Message.create({groupId:'global',from:u.username,text:clean});
+        const payload={id:String(msg._id),from:u.username,text:clean,createdAt:msg.createdAt};
+        io.emit('global:message',payload);
+        await saveEvent('global_message',{from:u.username,messageId:String(msg._id)});
+      }catch(e){socket.emit('chat:error',{message:e.message||'ارسال پیام ناموفق بود.'})}
+    });
+
+    socket.on('global:history',async({before,limit=60}={})=>{
+      try{
+        const safe=Math.min(Math.max(Number(limit)||60,1),100);
+        const q={groupId:'global'};if(before)q.createdAt={$lt:new Date(before)};
+        const rows=await Message.find(q).sort({createdAt:-1}).limit(safe).lean();
+        socket.emit('global:history',{items:rows.reverse(),hasMore:rows.length===safe});
+      }catch(e){socket.emit('chat:error',{message:e.message||'تاریخچه چت در دسترس نیست.'})}
+    });
+
     socket.on('chat:private:send',async({to,text}={})=>{
       try{
         if(!allowMessage())throw new Error('تعداد پیام‌ها در این لحظه زیاد است؛ چند ثانیه بعد دوباره تلاش کن.');
