@@ -27,3 +27,5 @@ export const adminApi={stats:()=>api('/admin/stats'),users:()=>api('/admin/users
 export const reportApi={create:body=>api('/reports',{method:'POST',body:JSON.stringify(body)})};
 export const notificationApi={list:()=>api('/notifications'),read:id=>api(`/notifications/${id}/read`,{method:'POST'}),readAll:()=>api('/notifications/read-all',{method:'POST'})};
 export default api;
+
+export const monetizationApi={catalog:()=>api('/monetization/catalog'),me:()=>api('/monetization/me'),transactions:()=>api('/monetization/transactions'),buyPremium:planId=>api('/monetization/premium/purchase',{method:'POST',body:JSON.stringify({planId})}),buyCoins:packageId=>api('/monetization/coins/purchase',{method:'POST',body:JSON.stringify({packageId})}),mockComplete:paymentId=>api('/monetization/payments/'+paymentId+'/mock-complete',{method:'POST',body:JSON.stringify({paymentId})}),buyItem:id=>api('/monetization/items/'+id+'/purchase',{method:'POST'}),customize:body=>api('/monetization/customize',{method:'PATCH',body:JSON.stringify(body)})};
