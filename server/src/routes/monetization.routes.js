@@ -1,0 +1,13 @@
+import {Router} from 'express';
+import {z} from 'zod';
+import * as c from '../controllers/monetization.controller.js';
+import {requireAuth} from '../middleware/auth.js';
+import {validate} from '../middleware/validate.js';
+const r=Router();const id=z.string().uuid();
+r.get('/catalog',c.catalog);r.use(requireAuth);r.get('/me',c.state);r.get('/transactions',c.transactions);
+r.post('/premium/purchase',validate(z.object({planId:id})),c.buyPremium);
+r.post('/coins/purchase',validate(z.object({packageId:id})),c.buyCoins);
+r.post('/payments/:paymentId/mock-complete',validate(z.object({paymentId:id})),c.completeMock);
+r.post('/items/:id/purchase',validate(z.object({id})),c.buyItem);
+r.patch('/customize',validate(z.object({background:z.string().max(80).nullable().optional(),frame:z.string().max(80).nullable().optional(),badge:z.string().max(80).nullable().optional(),nameEffect:z.string().max(80).nullable().optional(),banner:z.string().max(80).nullable().optional(),theme:z.string().max(80).nullable().optional()})),c.customize);
+export default r;
