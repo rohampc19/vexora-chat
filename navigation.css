@@ -1,0 +1,186 @@
+/* VEXORA CHAT — navigation only */
+.vexora-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 1400;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  transform: translateX(-50%);
+  padding: 5px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.065);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  backdrop-filter: blur(24px) saturate(120%);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  color: inherit;
+}
+
+.vexora-nav::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.vexora-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.vexora-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 76px;
+  height: 42px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(255,255,255,.67);
+  background: transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  font: inherit;
+  font-size: .76rem;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.vexora-nav__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 17px;
+}
+
+.vexora-nav__icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vexora-nav__label {
+  display: inline-block;
+}
+
+.vexora-nav__link:hover {
+  color: rgba(255,255,255,.93);
+  background: rgba(255,255,255,.045);
+  transform: translateY(-1px);
+}
+
+.vexora-nav__link.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.075);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+.vexora-nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 13px;
+  height: 1.5px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+  box-shadow: 0 0 7px rgba(255,255,255,.12);
+}
+
+.vexora-nav__link:focus-visible {
+  outline: 1px solid rgba(255,255,255,.35);
+  outline-offset: 2px;
+}
+
+body.has-vexora-navigation {
+  padding-bottom: 100px;
+}
+
+@media (max-width: 760px) {
+  .vexora-nav {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: calc(100vw - 32px);
+    max-width: 430px;
+    padding: 5px;
+  }
+
+  .vexora-nav__inner {
+    width: 100%;
+    gap: 1px;
+  }
+
+  .vexora-nav__link {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 48px;
+    padding: 0 4px;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .62rem;
+  }
+
+  .vexora-nav__icon {
+    flex-basis: 19px;
+  }
+
+  .vexora-nav__icon svg {
+    width: 19px;
+    height: 19px;
+    stroke-width: 1.5;
+  }
+
+  body.has-vexora-navigation {
+    padding-bottom: calc(94px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 360px) {
+  .vexora-nav {
+    width: calc(100vw - 20px);
+  }
+
+  .vexora-nav__link {
+    font-size: .57rem;
+    gap: 3px;
+  }
+
+  .vexora-nav__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (min-width: 761px) {
+  .vexora-nav {
+    bottom: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vexora-nav__link {
+    transition-duration: .01ms;
+  }
+}
