@@ -12,3 +12,5 @@ r.post('/users/:id/unblock',c.unblock);
 r.get('/reports',c.reports);r.get('/logs',c.logs);
 r.post('/reports/:id/close',c.closeReport);
 export default r;
+
+r.get('/monetization',requireRole('admin'),c.monetization);r.post('/monetization/items',requireRole('admin'),c.createItem);r.patch('/monetization/items/:id',requireRole('admin'),c.updateItem);r.patch('/monetization/plans/:id',requireRole('admin'),c.updatePlan);r.patch('/monetization/coins/:id',requireRole('admin'),c.updateCoinPackage);r.post('/monetization/wallet/:userId/adjust',requireRole('admin'),c.walletAdjust);
