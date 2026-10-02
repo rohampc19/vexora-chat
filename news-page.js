@@ -8,7 +8,7 @@
   if (!grid) return;
 
   let activeCategory = "all";
-  const labels = { all: "همه", gaming: "Gaming", esports: "Esports", hardware: "Hardware Updates" };
+  const labels = { all: "همه", gaming: "Gaming", esports: "Esports" };
   const localNews = () => typeof getLocalDemoNews === "function" ? getLocalDemoNews() : [];
   const articleHref = item => `news-detail.html?id=${encodeURIComponent(item.id)}`;
   const safeDate = value => { const date = new Date(value); return Number.isNaN(date.getTime()) ? new Date(0) : date; };
