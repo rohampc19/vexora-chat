@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به VEXORA CHAT</title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <div class="vexora-logo">
+        <div class="vexora-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3 L12 21 L18 3 M9 12 L15 12"/>
+          </svg>
+        </div>
+        <span class="vexora-logo-text">VEXORA</span>
+      </div>
+      <h2 id="formTitle">خوش برگشتی!</h2>
+      <p class="auth-subtitle" id="formSubtitle">وارد شو و به جمع گیمرها بپیوند</p>
+    </div>
+
+    <!-- ===== LOGIN FORM ===== -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label">ایمیل</label>
+        <input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" required>
+        <div class="form-error" id="loginEmailError"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">رمز عبور</label>
+        <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" required>
+        <div class="form-error" id="loginPasswordError"></div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:var(--space-5);">
+        <a href="#" style="font-size:0.82rem; color:var(--accent-primary); font-weight:600;" id="forgotPasswordLink">رمز عبور را فراموش کردی؟</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+        <span id="loginBtnText">ورود</span>
+      </button>
+    </form>
+
+    <!-- ===== SIGNUP FORM (Hidden by default) ===== -->
+    <form id="signupForm" style="display:none;">
+      <div class="form-group">
+        <label class="form-label">نام کاربری</label>
+        <input type="text" class="form-input" id="signupUsername" placeholder="gaming_hero" required>
+        <div class="form-error" id="signupUsernameError"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">ایمیل</label>
+        <input type="email" class="form-input" id="signupEmail" placeholder="you@example.com" required>
+        <div class="form-error" id="signupEmailError"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">رمز عبور</label>
+        <input type="password" class="form-input" id="signupPassword" placeholder="••••••••" required>
+        <div class="pw-strength" id="pwStrengthMeter">
+          <div class="pw-strength-bar"></div>
+          <div class="pw-strength-bar"></div>
+          <div class="pw-strength-bar"></div>
+          <div class="pw-strength-bar"></div>
+        </div>
+        <div class="form-hint" id="pwStrengthText">حداقل ۸ کاراکتر، شامل حرف بزرگ، کوچک و عدد</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">تکرار رمز عبور</label>
+        <input type="password" class="form-input" id="signupPasswordConfirm" placeholder="••••••••" required>
+        <div class="form-error" id="signupPasswordConfirmError"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" style="margin-top:var(--space-2);" id="signupSubmitBtn">
+        <span id="signupBtnText">ساخت حساب کاربری</span>
+      </button>
+    </form>
+
+    <div class="auth-switch" id="authSwitch">
+      حساب کاربری نداری؟ <a href="#" id="switchToSignup">ثبت‌نام کن</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
