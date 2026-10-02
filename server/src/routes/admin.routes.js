@@ -10,5 +10,5 @@ r.post('/users/:id/:action',c.approve);
 r.post('/users/:id/block',c.block);
 r.post('/users/:id/unblock',c.unblock);
 r.get('/reports',c.reports);r.get('/logs',c.logs);
-r.post('/reports/:id/close',c.closeReport);
+r.post('/reports/:id/close',c.closeReport);r.get('/monetization',c.monetization);r.post('/monetization/items',c.createItem);r.patch('/monetization/items/:id',c.updateItem);r.patch('/monetization/plans/:id',c.updatePlan);r.patch('/monetization/coins/:id',c.updateCoinPackage);r.post('/monetization/wallet/:userId/adjust',c.walletAdjust);
 export default r;
