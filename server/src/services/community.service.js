@@ -4,14 +4,14 @@ import {create as notify} from './notification.service.js';
 
 const mapPost=(r)=>({
   id:r.id,body:r.body,imageUrl:r.image_url,createdAt:r.created_at,
-  author:{username:r.username,displayName:r.display_name,avatarUrl:r.avatar_url},
+  author:{username:r.username,displayName:r.display_name,avatarUrl:r.avatar_url,isPremium:!!r.is_premium},
   likes:Number(r.likes||0),liked:!!r.liked,comments:Number(r.comments||0)
 });
 
 export async function listPosts(userId,{page=1,limit=12}={}){
   const p=Math.max(1,Number(page)||1), l=Math.min(30,Math.max(1,Number(limit)||12)), offset=(p-1)*l;
   const r=await pool.query(`
-    select p.id,p.body,p.image_url,p.created_at,u.username,u.display_name,u.avatar_url,
+    select p.id,p.body,p.image_url,p.created_at,u.username,u.display_name,u.avatar_url,u.is_premium,
       (select count(*) from post_likes pl where pl.post_id=p.id)::int likes,
       (select count(*) from post_comments pc where pc.post_id=p.id)::int comments,
       exists(select 1 from post_likes me where me.post_id=p.id and me.user_id=$1) liked
@@ -35,10 +35,10 @@ export async function likePost(userId,postId){
 }
 
 export async function comments(postId){
-  const r=await pool.query(`select pc.id,pc.text,pc.created_at,u.username,u.display_name,u.avatar_url,
+  const r=await pool.query(`select pc.id,pc.text,pc.created_at,u.username,u.display_name,u.avatar_url,u.is_premium,
     (select count(*) from comment_likes cl where cl.comment_id=pc.id)::int likes
     from post_comments pc join users u on u.id=pc.user_id where pc.post_id=$1 order by pc.created_at desc`,[postId]);
-  return r.rows.map(x=>({id:x.id,text:x.text,createdAt:x.created_at,author:{username:x.username,displayName:x.display_name,avatarUrl:x.avatar_url},likes:Number(x.likes)}));
+  return r.rows.map(x=>({id:x.id,text:x.text,createdAt:x.created_at,author:{username:x.username,displayName:x.display_name,avatarUrl:x.avatar_url,isPremium:!!x.is_premium},likes:Number(x.likes)}));
 }
 
 export async function addComment(userId,postId,text){
