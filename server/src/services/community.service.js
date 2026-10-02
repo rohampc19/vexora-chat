@@ -4,14 +4,14 @@ import {create as notify} from './notification.service.js';
 
 const mapPost=(r)=>({
   id:r.id,body:r.body,imageUrl:r.image_url,createdAt:r.created_at,
-  author:{username:r.username,displayName:r.display_name,avatarUrl:r.avatar_url},
+  author:{username:r.username,displayName:r.display_name,avatarUrl:r.avatar_url,isPremium:!!r.is_premium},
   likes:Number(r.likes||0),liked:!!r.liked,comments:Number(r.comments||0)
 });
 
 export async function listPosts(userId,{page=1,limit=12}={}){
   const p=Math.max(1,Number(page)||1), l=Math.min(30,Math.max(1,Number(limit)||12)), offset=(p-1)*l;
   const r=await pool.query(`
-    select p.id,p.body,p.image_url,p.created_at,u.username,u.display_name,u.avatar_url,
+    select p.id,p.body,p.image_url,p.created_at,u.username,u.display_name,u.avatar_url,u.is_premium,
       (select count(*) from post_likes pl where pl.post_id=p.id)::int likes,
       (select count(*) from post_comments pc where pc.post_id=p.id)::int comments,
       exists(select 1 from post_likes me where me.post_id=p.id and me.user_id=$1) liked
@@ -22,7 +22,7 @@ export async function listPosts(userId,{page=1,limit=12}={}){
 
 export async function createPost(userId,{body,imageUrl}){
   const r=await pool.query('insert into posts(author_id,body,image_url) values($1,$2,$3) returning id,body,image_url,created_at',[userId,body.trim(),imageUrl||null]);
-  const user=await pool.query('select username,display_name,avatar_url from users where id=$1',[userId]);
+  const user=await pool.query('select username,display_name,avatar_url,is_premium from users where id=$1',[userId]);
   return mapPost({...r.rows[0],...user.rows[0],likes:0,comments:0,liked:false});
 }
 
