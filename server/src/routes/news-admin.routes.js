@@ -4,7 +4,7 @@ import {requireAuth,requireRole} from '../middleware/auth.js';
 import {validate} from '../middleware/validate.js';
 import * as c from '../controllers/news-admin.controller.js';
 const r=Router();
-const schema=z.object({title:z.string().min(5).max(220),excerpt:z.string().min(10).max(500),body:z.string().min(20).max(20000),category:z.enum(['Gaming','Esports','Hardware','Updates']),featured:z.boolean().optional(),published:z.boolean().optional()});
+const schema=z.object({title:z.string().min(5).max(220),excerpt:z.string().min(10).max(500),body:z.string().min(20).max(20000),category:z.enum(['Gaming','Esports','Updates']),featured:z.boolean().optional(),published:z.boolean().optional()});
 r.use(requireAuth,requireRole('moderator','admin'));
 r.get('/',c.list);r.post('/',validate(schema),c.create);r.patch('/:id',validate(schema.partial()),c.update);r.delete('/:id',c.remove);
 export default r;
