@@ -7,7 +7,7 @@ const rowNews=x=>({id:x.id,title:x.title,excerpt:x.excerpt,body:x.body,category:
 export async function listNews({q='',category='',featured=false}={}){
   const args=[];const where=['n.published=true'];
   if(q){args.push(`%${q}%`);where.push(`(n.title ilike $${args.length} or n.excerpt ilike $${args.length} or n.body ilike $${args.length})`)}
-  if(['Gaming','Esports','Hardware','Updates'].includes(category)){args.push(category);where.push(`n.category=$${args.length}`)}
+  if(['Gaming','Esports','Updates'].includes(category)){args.push(category);where.push(`n.category=$${args.length}`)}
   if(featured===true){where.push('n.featured=true')}
   const r=await pool.query(`select n.id,n.title,n.excerpt,n.category,n.featured,n.created_at,(select count(*) from news_likes nl where nl.news_id=n.id)::int likes from news n where ${where.join(' and ')} order by n.featured desc,n.created_at desc limit 50`,args);
   return r.rows.map(x=>({...x,createdAt:x.created_at,likes:Number(x.likes)}));
