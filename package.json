@@ -1,7 +1,7 @@
 {
   "name": "vexora-chat",
   "version": "4.0.0",
-  "description": "پلتفرم گیمینگ و اجتماعی فارسی VEXORA CHAT - Professional Gaming & Social Platform",
+  "description": "پلتفرم گیمینگ و اجتماعی فارسی VEXORA CHAT",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
