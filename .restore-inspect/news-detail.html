@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خبر | VEXORA CHAT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./news.css">
+    <link rel="stylesheet" href="./design-system.css">
+</head>
+
+<body>
+    <!-- TOP SLIM NAV (ناوبری اسلیم) -->
+    <header class="slim-nav">
+        <a href="news.html" class="slim-nav__back">
+            بازگشت به اخبار
+        </a>
+        <nav class="site-nav">
+            <a href="index.html">خانه</a>
+            <a href="news.html" class="active">اخبار</a>
+            <a href="chat.html">چت</a>
+            <a href="chat.html">چت</a>
+            <a href="profile.html">پروفایل</a>
+        </nav>
+    </header>
+    <!-- NEWS DETAIL -->
+    <main class="news-detail-page">
+        <article class="insta-post" id="newsPost">
+            <!-- HEADER: نویسنده -->
+            <header class="insta-post__header">
+                <button type="button" class="insta-post__author" id="postAuthor">
+                    <span class="torex-author__avatar insta-post__avatar" id="postAvatar">T</span>
+                    <span class="insta-post__names">
+                        <strong id="postAuthorName">
+                            ادمین TOREX
+                            <span class="torex-verified">✓</span>
+                        </strong>
+                        <small id="postAuthorHandle">@admin</small>
+                    </span>
+                </button>
+                <button type="button" class="insta-follow" id="followButton">
+                    دنبال کردن
+                </button>
+            </header>
+            <!-- IMAGE -->
+            <div class="insta-post__image" id="postImage">
+                <i class="fa-solid fa-newspaper"></i>
+            </div>
+            <!-- ACTIONS -->
+            <div class="insta-post__actions">
+                <button type="button" id="likeButton" aria-label="لایک">
+                    <i class="fa-regular fa-heart"></i>
+                    <span id="likeCount">0</span>
+                </button>
+                <button type="button" id="commentFocus" aria-label="دیدگاه">
+                    <i class="fa-regular fa-comment"></i>
+                    <span id="commentCount">0</span>
+                </button>
+                <button type="button" id="shareButton" aria-label="ارسال">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
+                <button type="button" id="viewProfileButton" class="insta-post__profile-btn">
+                    <i class="fa-solid fa-user"></i>
+                    پروفایل نویسنده
+                </button>
+            </div>
+            <!-- CONTENT -->
+            <div class="insta-post__body">
+                <span class="card-category" id="postCategory">
+                    TOREX
+                </span>
+                <h1 id="postTitle">
+                    در حال بارگذاری...
+                </h1>
+                <p id="postText">
+                </p>
+                <div class="torex-news-tags" id="postTags">
+                </div>
+                <time id="postTime">
+                </time>
+            </div>
+            <!-- COMMENTS -->
+            <section class="insta-comments">
+                <h2>
+                    نظرات
+                </h2>
+                <div class="insta-comments__list" id="commentsList">
+                </div>
+                <form class="insta-comment-form" id="commentForm">
+                    <input type="text" id="commentInput" placeholder="نظرت رو بنویس..." maxlength="300"
+                        autocomplete="off">
+                    <button type="submit">
+                        ارسال
+                    </button>
+                </form>
+            </section>
+        </article>
+    </main>
+    <script src="./app.js"></script>
+    <script src="./news-detail.js"></script>
+</body>
+
+</html>

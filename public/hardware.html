@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>سخت‌افزار | VEXORA CHAT</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .hardware-page {
+            max-width: 1180px;
+            margin: auto;
+            padding: 40px 24px 120px
+        }
+
+        .hardware-hero,
+        .hardware-card {
+            background: rgba(20, 24, 34, .86);
+            border: 1px solid #2e3547;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px #0005
+        }
+
+        .hardware-hero {
+            padding: 48px;
+            margin-bottom: 20px;
+            background: radial-gradient(circle at 12% 0, #7c5cff33, transparent 42%), rgba(20, 24, 34, .86)
+        }
+
+        .hardware-hero h1 {
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            margin: 10px 0
+        }
+
+        .hardware-hero p {
+            color: #a7aec0;
+            line-height: 2;
+            max-width: 650px
+        }
+
+        .hardware-kicker {
+            color: #2dd4bf;
+            font-size: .8rem;
+            letter-spacing: .2em
+        }
+
+        .hardware-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0
+        }
+
+        .hardware-filters button {
+            border: 1px solid #2e3547;
+            border-radius: 999px;
+            background: #141822;
+            color: #f1f3f8;
+            padding: 10px 16px
+        }
+
+        .hardware-filters button.active {
+            background: #7c5cff;
+            color: white;
+            border-color: #7c5cff
+        }
+
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px
+        }
+
+        .hardware-card {
+            padding: 22px
+        }
+
+        .hardware-card h2 {
+            font-size: 1.1rem
+        }
+
+        .hardware-card p {
+            color: #a7aec0;
+            line-height: 1.9
+        }
+
+        .hardware-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #2dd4bf;
+            border-top: 1px solid #2e3547;
+            padding-top: 14px;
+            margin-top: 18px
+        }
+
+        .hardware-empty {
+            text-align: center;
+            color: #a7aec0;
+            padding: 48px
+        }
+
+        .hardware-back {
+            color: #2dd4bf;
+            font-weight: bold
+        }
+
+        @media(max-width:768px) {
+            .hardware-page {
+                padding: 24px 16px 100px
+            }
+
+            .hardware-hero {
+                padding: 28px 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hardware-page"><a class="hardware-back" href="/">← بازگشت به VEXORA CHAT</a>
+        <section class="hardware-hero"><span class="hardware-kicker">VEXORA / HARDWARE LAB</span>
+            <h1>سیستم بعدی‌ات را هوشمندانه بساز.</h1>
+            <p>راهنمای قطعات گیمینگ، مقایسه سخت‌افزار و پیشنهاد سیستم برای گیمرها و تولیدکنندگان محتوا.</p>
+        </section>
+        <div class="hardware-filters" role="group" aria-label="فیلتر سخت‌افزار"><button class="active"
+                data-filter="all">همه</button><button data-filter="gpu">کارت گرافیک</button><button
+                data-filter="cpu">پردازنده</button><button data-filter="monitor">مانیتور</button><button
+                data-filter="peripheral">تجهیزات</button></div>
+        <section id="hardwareGrid" class="hardware-grid" aria-live="polite"></section>
+    </div>
+    <script src="js/hardware.js"></script>
+</body>
+
+</html>

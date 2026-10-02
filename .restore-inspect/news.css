@@ -1,0 +1,634 @@
+css
+/* =====================================================
+   VEXORA CHAT — NEWS
+   PC + MOBILE
+===================================================== */
+
+.news-page {
+    width: min(1200px, 92%);
+    margin: auto;
+    padding: 55px 0 100px;
+}
+
+
+/* =====================================================
+   HEADER TITLE
+===================================================== */
+
+.news-heading {
+    margin-bottom: 35px;
+}
+
+.news-label {
+    display: block;
+    color: #61aaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.news-heading h1 {
+    font-size: clamp(30px, 4vw, 43px);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.news-heading p {
+    color: #788497;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.news-categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.category {
+    padding: 9px 19px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(255,255,255,.035);
+
+    color: #7d8899;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.category:hover,
+.category.active {
+    color: #fff;
+
+    border-color: rgba(75,160,255,.4);
+
+    background: rgba(60,145,255,.10);
+
+    box-shadow:
+        0 0 22px rgba(50,140,255,.10);
+}
+
+
+/* =====================================================
+   FEATURED NEWS
+===================================================== */
+
+.featured-news {
+    display: grid;
+
+    grid-template-columns: 1fr 1.15fr;
+
+    min-height: 420px;
+
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,.045);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    margin-bottom: 55px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   FEATURED IMAGE
+   عکس را بعداً اینجا قرار بده
+===================================================== */
+
+.featured-image {
+    order: 1;
+
+    min-height: 420px;
+
+    background: #101722;
+
+    overflow: hidden;
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: .5s;
+}
+
+.featured-news:hover .featured-image img {
+    transform: scale(1.04);
+}
+
+
+/* =====================================================
+   FEATURED CONTENT
+===================================================== */
+
+.featured-content {
+    order: 2;
+
+    padding: 50px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+.news-tag {
+    padding: 7px 12px;
+
+    border-radius: 9px;
+
+    background: rgba(70,155,255,.08);
+
+    border: 1px solid rgba(70,155,255,.18);
+
+    color: #62adff;
+
+    font-size: 10px;
+
+    margin-bottom: 18px;
+}
+
+.featured-content h2 {
+    font-size: clamp(25px, 3vw, 36px);
+
+    line-height: 1.65;
+
+    font-weight: 900;
+
+    color: #fff;
+
+    margin-bottom: 15px;
+}
+
+.featured-content p {
+    max-width: 600px;
+
+    color: #7b8798;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   META
+===================================================== */
+
+.news-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    color: #687487;
+
+    font-size: 10px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   READ BUTTON
+===================================================== */
+
+.news-read-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 11px 20px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #278fff,
+            #684dff
+        );
+
+    color: #fff;
+
+    font-size: 12px;
+
+    transition: .3s;
+
+    box-shadow:
+        0 0 20px rgba(50,130,255,.12);
+}
+
+.news-read-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(50,140,255,.30);
+}
+
+
+/* =====================================================
+   LATEST
+===================================================== */
+
+.latest-news {
+    margin-top: 20px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title span {
+    display: block;
+
+    color: #5daaff;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 5px;
+}
+
+.section-title h2 {
+    color: #fff;
+
+    font-size: 26px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   NEWS GRID
+===================================================== */
+
+.news-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   NEWS CARD
+===================================================== */
+
+.news-card {
+    overflow: hidden;
+
+    border-radius: 19px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    transition: .35s;
+}
+
+.news-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(70,155,255,.30);
+
+    box-shadow:
+        0 20px 55px
+        rgba(20,110,255,.10);
+}
+
+
+/* =====================================================
+   CARD IMAGE
+   این قسمت خالی است تا بعداً عکس بگذاری
+===================================================== */
+
+.news-card-image {
+    height: 185px;
+
+    background:
+        #111923;
+
+    overflow: hidden;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: .5s;
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.news-card-content {
+    padding: 21px;
+}
+
+.card-category {
+    display: inline-block;
+
+    color: #5eabff;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.news-card-content h3 {
+    color: #fff;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.news-card-content p {
+    color: #737f91;
+
+    font-size: 11px;
+
+    line-height: 1.9;
+
+    margin-bottom: 17px;
+}
+
+
+/* =====================================================
+   CARD FOOTER
+===================================================== */
+
+.card-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+    color: #626e7f;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   PC LARGE
+===================================================== */
+
+@media (min-width: 1200px) {
+
+    .news-page {
+        width: 1180px;
+    }
+
+    .news-grid {
+        gap: 25px;
+    }
+
+    .news-card-image {
+        height: 200px;
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .featured-news {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-image {
+        order: 1;
+        min-height: 300px;
+    }
+
+    .featured-content {
+        order: 2;
+        padding: 35px;
+    }
+
+    .news-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .news-page {
+        width: 94%;
+
+        padding:
+            30px 0 80px;
+    }
+
+
+    .news-heading {
+        text-align: right;
+
+        margin-bottom: 25px;
+    }
+
+    .news-heading h1 {
+        font-size: 28px;
+    }
+
+    .news-heading p {
+        font-size: 11px;
+    }
+
+
+    /* دسته‌بندی */
+
+    .news-categories {
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding-bottom: 6px;
+
+        scrollbar-width: none;
+    }
+
+    .news-categories::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category {
+        flex-shrink: 0;
+
+        padding:
+            8px 15px;
+
+        font-size: 10px;
+    }
+
+
+    /* خبر اصلی */
+
+    .featured-news {
+        grid-template-columns: 1fr;
+
+        border-radius: 20px;
+
+        margin-bottom: 40px;
+    }
+
+    .featured-image {
+        min-height: 210px;
+
+        height: 210px;
+    }
+
+    .featured-content {
+        padding: 25px 20px;
+    }
+
+    .featured-content h2 {
+        font-size: 22px;
+
+        line-height: 1.7;
+    }
+
+    .featured-content p {
+        font-size: 11px;
+    }
+
+    .news-meta {
+        gap: 10px;
+
+        font-size: 9px;
+    }
+
+
+    /* آخرین اخبار */
+
+    .section-title h2 {
+        font-size: 22px;
+    }
+
+
+    /* کارت‌ها */
+
+    .news-grid {
+        grid-template-columns: 1fr;
+
+        gap: 17px;
+    }
+
+    .news-card {
+        border-radius: 18px;
+    }
+
+    .news-card-image {
+        height: 190px;
+    }
+
+    .news-card-content {
+        padding: 18px;
+    }
+
+    .news-card-content h3 {
+        font-size: 15px;
+    }
+
+    .news-card-content p {
+        font-size: 10px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .news-heading h1 {
+        font-size: 24px;
+    }
+
+    .featured-image {
+        height: 180px;
+        min-height: 180px;
+    }
+
+    .featured-content h2 {
+        font-size: 20px;
+    }
+
+    .news-card-image {
+        height: 165px;
+    }
+}
+

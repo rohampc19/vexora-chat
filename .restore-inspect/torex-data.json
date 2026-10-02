@@ -1,0 +1,278 @@
+{
+  "users": [
+    {
+      "id": "u-admin",
+      "username": "admin",
+      "name": "ادمین TOREX",
+      "phone": "09120000000",
+      "password": "admin-demo",
+      "score": 9999,
+      "favoriteGame": "VEXORA CHAT",
+      "avatar": "T",
+      "role": "admin",
+      "status": "approved"
+    },
+    {
+      "id": "u-12daf805-51f9-40d8-ae50-55abbc887fbd",
+      "username": "rhy",
+      "name": "rhy",
+      "phone": "09945310709",
+      "password": "pwGVYxGmY6ZAU46",
+      "score": 0,
+      "favoriteGame": "—",
+      "avatar": "R",
+      "status": "approved"
+    },
+    {
+      "id": "u-1e9fbc64-a042-490a-a7af-1464cb75ba79",
+      "username": "rohammm",
+      "name": "rohammm",
+      "phone": "09224626769",
+      "password": "123456789",
+      "score": 0,
+      "favoriteGame": "—",
+      "avatar": "R",
+      "status": "approved"
+    },
+    {
+      "id": "u-748017d5-47c8-4ce9-9ff4-0994843fa169",
+      "username": "verify6909047",
+      "name": "verify6909047",
+      "phone": "09126909047",
+      "password": "pass12345",
+      "score": 0,
+      "favoriteGame": "—",
+      "avatar": "V",
+      "status": "approved"
+    },
+    {
+      "id": "u-656024f0-19f9-459d-968f-b4a53c309e1f",
+      "username": "kokoria",
+      "name": "kokoria",
+      "phone": "09123465859",
+      "password": "123456789",
+      "score": 0,
+      "favoriteGame": "—",
+      "avatar": "K",
+      "status": "approved"
+    },
+    {
+      "id": "u-25b6488c-0715-478d-abac-d263c44837eb",
+      "username": "kililili",
+      "name": "kililili",
+      "phone": "09124567893",
+      "password": "123456789",
+      "score": 0,
+      "favoriteGame": "—",
+      "avatar": "K",
+      "status": "approved"
+    }
+  ],
+  "clubs": [
+    {
+      "id": "gta",
+      "name": "GTA V",
+      "icon": "🎮",
+      "members": 0,
+      "description": "ماموریت، مسابقه و دورهمی در Los Santos"
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft",
+      "icon": "⛏️",
+      "members": 0,
+      "description": "ساخت‌وساز و ماجراجویی با دوستان"
+    },
+    {
+      "id": "fc",
+      "name": "FC 25",
+      "icon": "⚽",
+      "members": 0,
+      "description": "لیگ، مسابقه و پیدا کردن هم‌تیمی"
+    },
+    {
+      "id": "cod",
+      "name": "Call of Duty",
+      "icon": "🎯",
+      "members": 0,
+      "description": "اسکوادهای رقابتی و مودهای چندنفره"
+    },
+    {
+      "id": "valorant",
+      "name": "Valorant",
+      "icon": "🔺",
+      "members": 0,
+      "description": "رنک، تمرین و تیم‌سازی"
+    },
+    {
+      "id": "fortnite",
+      "name": "Fortnite",
+      "icon": "🛡️",
+      "members": 0,
+      "description": "بتل رویال و رویدادهای گروهی"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m-1788623210040",
+      "conversation": "rhy",
+      "sender": "admin",
+      "text": "QA message",
+      "createdAt": "2026-09-05T15:46:50.040Z",
+      "read": false
+    }
+  ],
+  "news": [
+    {
+      "id": "n-gta6",
+      "title": "جزئیات تازه از یکی از موردانتظارترین بازی‌های سال",
+      "excerpt": "نگاهی به خبرهای مهم این هفته از دنیای بازی و به‌روزرسانی‌های استودیوها.",
+      "text": "تازه‌ترین گزارش‌ها از روند توسعه و برنامه‌های آینده منتشر شده است. این خبر با تمرکز بر اطلاعات قابل بررسی و بدون شایعه‌پردازی گردآوری شده است.",
+      "category": "gaming",
+      "tags": [
+        "Gaming",
+        "Updates"
+      ],
+      "author": "admin",
+      "authorName": "ادمین TOREX",
+      "verified": true,
+      "image": "",
+      "likes": [
+        "admin"
+      ],
+      "comments": [],
+      "createdAt": "2026-09-05T15:46:18.835Z",
+      "publishedAt": "2026-09-05T15:46:18.835Z",
+      "views": 2400,
+      "status": "published"
+    },
+    {
+      "id": "n-esports",
+      "title": "تقویم رقابت‌های مهم ورزش‌های الکترونیک",
+      "excerpt": "مسابقات مهم این ماه را از دست ندهید؛ برنامه و نتایج در VEXORA CHAT دنبال می‌شود.",
+      "text": "از رقابت‌های تیمی تا مسابقات انفرادی، رویدادهای مهم ماه را در دسته ورزش الکترونیک دنبال کنید.",
+      "category": "esports",
+      "tags": [
+        "Esports",
+        "TOREX"
+      ],
+      "author": "admin",
+      "authorName": "ادمین TOREX",
+      "verified": true,
+      "image": "",
+      "likes": [],
+      "comments": [],
+      "createdAt": "2026-09-04T15:46:18.835Z",
+      "publishedAt": "2026-09-04T15:46:18.835Z",
+      "views": 980,
+      "status": "published"
+    },
+    {
+      "id": "n-hardware",
+      "title": "راهنمای کوتاه ارتقای سیستم برای بازی روان‌تر",
+      "excerpt": "قبل از خرید قطعه جدید، این نکات را برای انتخاب هوشمندانه بررسی کنید.",
+      "text": "ارتقای سیستم همیشه به معنای خرید گران‌ترین قطعه نیست. ابتدا گلوگاه سیستم را پیدا کنید و سپس اولویت ارتقا را مشخص کنید.",
+      "category": "hardware",
+      "tags": [
+        "Hardware",
+        "PC"
+      ],
+      "author": "admin",
+      "authorName": "ادمین TOREX",
+      "verified": true,
+      "image": "",
+      "likes": [],
+      "comments": [],
+      "createdAt": "2026-09-03T15:46:18.835Z",
+      "publishedAt": "2026-09-03T15:46:18.835Z",
+      "views": 640,
+      "status": "published"
+    }
+  ],
+  "follows": [],
+  "notifications": [
+    {
+      "id": "no-1788270391175-5o1f",
+      "user": "rhy",
+      "type": "approved",
+      "from": "admin",
+      "text": "ثبت‌نام شما تایید شد؛ به VEXORA CHAT خوش آمدی! 🎮",
+      "read": false,
+      "createdAt": "2026-09-01T13:46:31.175Z"
+    },
+    {
+      "id": "no-1788271295169-l06z",
+      "user": "kokoria",
+      "type": "approved",
+      "from": "admin",
+      "text": "ثبت‌نام شما تایید شد؛ به VEXORA CHAT خوش آمدی! 🎮",
+      "read": false,
+      "createdAt": "2026-09-01T14:01:35.169Z"
+    },
+    {
+      "id": "no-1788271604536-pogf",
+      "user": "kililili",
+      "type": "approved",
+      "from": "admin",
+      "text": "ثبت‌نام شما تایید شد؛ به VEXORA CHAT خوش آمدی! 🎮",
+      "read": false,
+      "createdAt": "2026-09-01T14:06:44.536Z"
+    },
+    {
+      "id": "no-1788623192427-51mx",
+      "user": "verify6909047",
+      "type": "approved",
+      "from": "admin",
+      "text": "Your registration was approved. Welcome to VEXORA CHAT!",
+      "read": false,
+      "createdAt": "2026-09-05T15:46:32.427Z"
+    }
+  ],
+  "sessions": [
+    {
+      "token": "c83676252c346ccd4ba37a2f066c919849bacbeb83d308a8",
+      "userId": "u-1e9fbc64-a042-490a-a7af-1464cb75ba79",
+      "createdAt": "2026-09-02T07:33:18.289Z"
+    },
+    {
+      "token": "e5c4d37a47e4689f51a6d0f4e1170ff3be25a3e65953a06e",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T15:46:49.441Z"
+    },
+    {
+      "token": "6965e2af11c4c229fd2520e17fe74c6fa4d9a5a89a7282a1",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T15:49:01.427Z"
+    },
+    {
+      "token": "f59b911ef37734fa997f88ff591fb065e16ef8954ab0899a",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T15:50:44.217Z"
+    },
+    {
+      "token": "a9777ee6a882ef05a5d96b4c60c2d19dce94888e1b1389c2",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T16:04:45.087Z"
+    },
+    {
+      "token": "f495efb65381716dea2f5e4bf45b6d4b3b44f5a3d738d04b",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T16:05:59.803Z"
+    },
+    {
+      "token": "c85e7565bfa6abb0a0b4f443e6d268a1f6fe2c6edf84daee",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T16:08:57.396Z"
+    },
+    {
+      "token": "97de6465267bb2abe50bd489a98878b3b73311352ceccf42",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T16:09:23.368Z"
+    },
+    {
+      "token": "de6d2f2c4a33024fac5d2d0ace1b5d9797f61c0202c6de73",
+      "userId": "u-admin",
+      "createdAt": "2026-09-05T16:12:22.688Z"
+    }
+  ]
+}

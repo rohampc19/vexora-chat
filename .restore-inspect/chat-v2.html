@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>چت | VEXORA CHAT</title>
+    <link rel="stylesheet" href="design-system.css">
+    <link rel="stylesheet" href="chat-v2.css">
+</head>
+
+<body>
+    <main class="messenger-page" aria-label="پیام‌ها">
+        <aside class="messenger-sidebar">
+            <div class="messenger-logo"><a href="index.html"><span class="logo-text">پیام‌ها</span></a></div>
+            <div class="user-search-section">
+                <div class="search-title"><span>گفتگوها</span><span class="message-count" id="messageCount">0</span>
+                </div><label class="user-search"><span aria-hidden="true">⌕</span><input id="userSearch" type="search"
+                        placeholder="جستجوی گیمر..." autocomplete="off"></label><button class="search-result"
+                    id="searchResult" type="button" hidden><span class="search-result-avatar">T</span><span
+                        class="search-result-info"><strong></strong><small>باز کردن گفتگو</small></span></button>
+            </div>
+            <div class="chat-list" id="chatList">
+                <div class="chat-empty">در حال بارگذاری گفتگوها...</div>
+            </div>
+            <div class="messenger-sidebar-footer"><a href="profile.html">پروفایل</a><a href="index.html">بازگشت</a>
+            </div>
+        </aside>
+        <section class="conversation">
+            <header class="conversation-header"><button class="mobile-back" id="mobileBack" type="button"
+                    aria-label="بازگشت به فهرست">‹</button>
+                <div class="conversation-user"><span class="conversation-avatar" id="conversationAvatar">T</span>
+                    <div><strong id="conversationName">یک گفتگو را انتخاب کنید</strong><small
+                            id="conversationHandle">آماده گفتگو</small></div>
+                </div>
+                <div class="conversation-actions"><button id="profileButton" type="button"
+                        aria-label="مشاهده پروفایل">◉</button><button id="clearButton" type="button"
+                        aria-label="پاک کردن صفحه گفتگو">⌫</button></div>
+            </header>
+            <div class="conversation-messages" id="messages">
+                <div class="chat-empty">برای شروع، یک گفتگو را انتخاب کنید.</div>
+            </div>
+            <form class="message-input-area" id="messageForm"><button class="input-action" id="stickerButton"
+                    type="button" aria-label="افزودن شکلک">☺</button><input id="messageInput" maxlength="500"
+                    autocomplete="off" placeholder="پیامت را بنویس..." disabled><button class="send-button"
+                    type="submit" aria-label="ارسال پیام">➤</button></form>
+        </section>
+    </main>
+    <script src="app.js"></script>
+    <script src="chat-v2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>پیام‌ها | VEXORA CHAT</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="design-system.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MAIN CHAT APPLICATION
+===================================================== -->
+
+<main class="messenger-page">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="messenger-sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="messenger-logo">
+
+            <a href="index.html">
+
+                <span class="logo-icon">
+                    🎮
+                </span>
+
+                <span class="logo-text">
+                    VEXORA CHAT
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- SEARCH USER -->
+
+        <div class="user-search-section">
+
+            <div class="search-title">
+
+                <span>
+                    پیام‌ها
+                </span>
+
+                <span class="message-count">
+                    3
+                </span>
+
+            </div>
+
+
+            <div class="user-search">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="جستجوی ID گیمر..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- SEARCH RESULT -->
+
+            <div
+                class="search-result"
+                id="searchResult"
+                hidden
+            >
+
+                <div class="search-result-avatar">
+                    R
+                </div>
+
+                <div class="search-result-info">
+
+                    <strong>
+                        @roham
+                    </strong>
+
+                    <span>
+                        مشاهده پروفایل
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CHAT LIST
+        ================================================== -->
+
+        <div class="chat-list" id="chatList">
+
+
+            <!-- CHAT 1 -->
+
+            <button
+                class="chat-user active"
+                data-user="roham"
+            >
+
+                <div class="chat-avatar online">
+
+                    R
+
+                    <span></span>
+
+                </div>
+
+
+                <div class="chat-user-info">
+
+                    <div class="chat-user-top">
+
+                        <strong>
+                            Roham
+                        </strong>
+
+                        <time>
+                            12:45
+                        </time>
+
+                    </div>
+
+
+                    <div class="chat-user-bottom">
+
+                        <span>
+                            بریم GTA VI؟ 🎮
+                        </span>
+
+                        <b>
+                            2
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- CHAT 2 -->
+
+            <button
+                class="chat-user"
+                data-user="ali"
+            >
+
+                <div class="chat-avatar">
+
+                    A
+
+                </div>
+
+
+                <div class="chat-user-info">
+
+                    <div class="chat-user-top">
+
+                        <strong>
+                            Ali
+                        </strong>
+
+                        <time>
+                            11:20
+                        </time>
+
+                    </div>
+
+
+                    <div class="chat-user-bottom">
+
+                        <span>
+                            اون بازی رو دیدی؟
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- CHAT 3 -->
+
+            <button
+                class="chat-user"
+                data-user="reza"
+            >
+
+                <div class="chat-avatar">
+
+                    R
+
+                </div>
+
+
+                <div class="chat-user-info">
+
+                    <div class="chat-user-top">
+
+                        <strong>
+                            Reza
+                        </strong>
+
+                        <time>
+                            دیروز
+                        </time>
+
+                    </div>
+
+
+                    <div class="chat-user-bottom">
+
+                        <span>
+                            😂🔥
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="chat-empty">
+
+                <div>
+                    💬
+                </div>
+
+                <span>
+                    هنوز چت دیگری نداری
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR FOOTER -->
+
+        <div class="messenger-sidebar-footer">
+
+            <a href="profile.html">
+                ⚙️ تنظیمات
+            </a>
+
+            <a href="index.html">
+                ← بازگشت
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         CHAT AREA
+    ================================================== -->
+
+    <section class="conversation">
+
+
+        <!-- =================================================
+             CONVERSATION HEADER
+        ================================================== -->
+
+        <header class="conversation-header">
+
+
+            <button
+                class="mobile-back"
+                id="mobileBack"
+            >
+                ←
+            </button>
+
+
+            <div class="conversation-user">
+
+
+                <div class="conversation-avatar online">
+
+                    R
+
+                    <span></span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Roham
+                    </strong>
+
+                    <small id="conversationHandle">
+                        @roham · آنلاین
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="conversation-actions">
+
+                <button
+                    type="button"
+                    id="profileButton"
+                    title="پروفایل"
+                    aria-label="مشاهده پروفایل"
+                >
+                    👤
+                </button>
+
+                <button
+                    type="button"
+                    id="moreButton"
+                    title="بیشتر"
+                    aria-label="گزینه‌های گفتگو"
+                >
+                    ⋮
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================== -->
+
+        <div
+            class="conversation-messages"
+            id="messages"
+        >
+
+
+            <!-- DATE -->
+
+            <div class="message-date">
+                امروز
+            </div>
+
+
+            <!-- RECEIVED -->
+
+            <div class="message-row received">
+
+                <div class="small-avatar">
+                    R
+                </div>
+
+
+                <div class="message-bubble">
+
+                    <p>
+                        سلام داداش 👋
+                    </p>
+
+                    <span>
+                        12:41
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECEIVED -->
+
+            <div class="message-row received">
+
+                <div class="small-avatar">
+                    R
+                </div>
+
+
+                <div class="message-bubble">
+
+                    <p>
+                        بریم یه دست بازی؟ 🎮🔥
+                    </p>
+
+                    <span>
+                        12:42
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SENT -->
+
+            <div class="message-row sent">
+
+
+                <div class="message-bubble">
+
+                    <p>
+                        آره 😂 الان میام
+                    </p>
+
+                    <span>
+                        12:43 ✓✓
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SENT -->
+
+            <div class="message-row sent">
+
+
+                <div class="message-bubble">
+
+                    <p>
+                        GTA VI رو دیدی؟ 👀🔥
+                    </p>
+
+                    <span>
+                        12:44 ✓✓
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECEIVED -->
+
+            <div class="message-row received">
+
+                <div class="small-avatar">
+                    R
+                </div>
+
+
+                <div class="message-bubble">
+
+                    <p>
+                        بریم GTA VI؟ 🎮
+                    </p>
+
+                    <span>
+                        12:45
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             STICKER PANEL
+        ================================================== -->
+
+        <div
+            class="sticker-panel"
+            id="stickerPanel"
+        >
+
+            <div class="sticker-panel-header">
+
+                <strong>
+                    استیکرهای TOREX
+                </strong>
+
+                <button id="closeStickers">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="sticker-tabs">
+
+                <button class="sticker-tab active">
+                    🎮
+                </button>
+
+                <button class="sticker-tab">
+                    😂
+                </button>
+
+                <button class="sticker-tab">
+                    🔥
+                </button>
+
+                <button class="sticker-tab">
+                    😎
+                </button>
+
+            </div>
+
+
+            <div class="stickers">
+
+                <button>🎮</button>
+                <button>👾</button>
+                <button>🕹️</button>
+                <button>🏆</button>
+
+                <button>🔥</button>
+                <button>💀</button>
+                <button>⚡</button>
+                <button>💯</button>
+
+                <button>😂</button>
+                <button>🤣</button>
+                <button>😭</button>
+                <button>😎</button>
+
+                <button>GG</button>
+                <button>EZ</button>
+                <button>NOOB</button>
+                <button>WP</button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MESSAGE INPUT
+        ================================================== -->
+
+        <form
+            class="message-input-area"
+            id="messageForm"
+        >
+
+
+            <button
+                type="button"
+                class="input-action"
+                id="stickerButton"
+                title="استیکر"
+            >
+                😊
+            </button>
+
+
+            <button
+                type="button"
+                class="input-action"
+                title="فایل"
+            >
+                ＋
+            </button>
+
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="پیامت رو بنویس..."
+                autocomplete="off"
+            >
+
+
+            <button
+                type="submit"
+                class="send-button"
+                title="ارسال"
+            >
+                ➤
+            </button>
+
+        </form>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     MOBILE NAV
+===================================================== -->
+
+<nav class="mobile-chat-nav">
+
+    <a href="index.html">
+        <span>⌂</span>
+        خانه
+    </a>
+
+    <a href="news.html">
+        <span>▣</span>
+        اخبار
+    </a>
+
+    <a href="news.html">
+        <span>▣</span>
+        اخبار
+    </a>
+
+    <a href="chat.html" class="active">
+        <span>💬</span>
+        پیام‌ها
+    </a>
+
+    <a href="profile.html">
+        <span>○</span>
+        پروفایل
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+if (false) {
+const messageForm =
+    document.getElementById("messageForm");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const messages =
+    document.getElementById("messages");
+
+const stickerButton =
+    document.getElementById("stickerButton");
+
+const stickerPanel =
+    document.getElementById("stickerPanel");
+
+const closeStickers =
+    document.getElementById("closeStickers");
+
+const userSearch =
+    document.getElementById("userSearch");
+
+const searchResult =
+    document.getElementById("searchResult");
+
+const mobileBack =
+    document.getElementById("mobileBack");
+
+
+
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+messageForm.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const text =
+        messageInput.value.trim();
+
+    if (!text) return;
+
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "message-row sent";
+
+
+    row.innerHTML = `
+
+        <div class="message-bubble">
+
+            <p>
+                ${text}
+            </p>
+
+            <span>
+                همین الان ✓
+            </span>
+
+        </div>
+
+    `;
+
+
+    messages.appendChild(row);
+
+    messageInput.value = "";
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+});
+
+
+
+/* =========================================
+   STICKER PANEL
+========================================= */
+
+stickerButton.addEventListener(
+    "click",
+    function() {
+
+        stickerPanel.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+closeStickers.addEventListener(
+    "click",
+    function() {
+
+        stickerPanel.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   ADD STICKER
+========================================= */
+
+document
+    .querySelectorAll(".stickers button")
+    .forEach(function(sticker) {
+
+        sticker.addEventListener(
+            "click",
+            function() {
+
+                messageInput.value +=
+                    sticker.textContent;
+
+                stickerPanel.classList.remove(
+                    "show"
+                );
+
+                messageInput.focus();
+
+            }
+        );
+
+    });
+
+
+
+/* =========================================
+   SEARCH USER
+========================================= */
+
+userSearch.addEventListener(
+    "input",
+    function() {
+
+        const value =
+            userSearch.value
+                .trim()
+                .toLowerCase();
+
+
+        if (
+            value === "@roham" ||
+            value === "roham"
+        ) {
+
+            searchResult.classList.add(
+                "show"
+            );
+
+        } else {
+
+            searchResult.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   CHAT USER SWITCH
+========================================= */
+
+document
+    .querySelectorAll(".chat-user")
+    .forEach(function(user) {
+
+        user.addEventListener(
+            "click",
+            function() {
+
+                document
+                    .querySelectorAll(".chat-user")
+                    .forEach(function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                user.classList.add(
+                    "active"
+                );
+
+
+                if (
+                    window.innerWidth <= 700
+                ) {
+
+                    document
+                        .querySelector(".messenger-page")
+                        .classList.add(
+                            "conversation-open"
+                        );
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+/* =========================================
+   MOBILE BACK
+========================================= */
+
+mobileBack.addEventListener(
+    "click",
+    function() {
+
+        document
+            .querySelector(".messenger-page")
+            .classList.remove(
+                "conversation-open"
+            );
+
+    }
+);
+
+}
+</script>
+<script src="app.js"></script>
+<script src="chat.js"></script>
+</body>
+</html>
+
+
+

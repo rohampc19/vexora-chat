@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعلان‌ها | VEXORA CHAT</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./design-system.css">
+    <style>
+        .notif-page {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 20px 120px;
+        }
+
+        .notif-page h1 {
+            margin-bottom: 20px;
+        }
+
+        .notif-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #14172a;
+            border: 1px solid #2a2f45;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+
+        .notif-item.unread {
+            border-color: #6c5ce7;
+            background: #191d36;
+        }
+
+        .notif-item .n-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #6c5ce7;
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+        }
+
+        .notif-item .n-icon {
+            font-size: 20px;
+        }
+
+        .notif-item .n-body {
+            flex: 1;
+            color: #e6e8f2;
+        }
+
+        .notif-item .n-body small {
+            display: block;
+            color: #8a8fa3;
+            margin-top: 4px;
+        }
+
+        .notif-item .n-body a,
+        .notif-item .n-body .n-user {
+            color: #a29bfe;
+            cursor: pointer;
+        }
+
+        .notif-empty {
+            color: #8a8fa3;
+            background: #14172a;
+            border: 1px dashed #2a2f45;
+            border-radius: 14px;
+            padding: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="slim-nav">
+        <a href="index.html" class="slim-nav__back">بازگشت</a>
+        <nav class="site-nav">
+            <a href="index.html">خانه</a>
+            <a href="news.html">اخبار</a>
+            <a href="chat.html">چت</a>
+            <a href="chat.html">چت</a>
+            <a href="profile.html">پروفایل</a>
+            <a href="notifications.html" class="active">اعلان‌ها</a>
+        </nav>
+    </header>
+    <main class="notif-page">
+        <h1>لیست اعلان‌ها</h1>
+        <div id="notifList"></div>
+    </main>
+    <script src="./app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const list = document.getElementById("notifList");
+            const user = getUser();
+            if (!user) { list.innerHTML = ""; const box = document.createElement("div"); box.className = "notif-empty"; box.textContent = "برای دیدن اعلان‌ها وارد حساب شوید."; box.addEventListener("click", () => location.href = "login.html"); list.append(box); return; }
+            const icons = { follow: "👤", comment: "💬", reply: "💬", approved: "✅" };
+            async function load() {
+                list.replaceChildren();
+                try {
+                    const result = await torexRequest("/notifications?user=" + encodeURIComponent(user.username));
+                    if (!result.notifications.length) {
+                        const empty = document.createElement("div");
+                        empty.className = "notif-empty";
+                        empty.textContent = "اعلان جدیدی ندارید.";
+                        list.append(empty);
+                        return;
+                    }
+                    result.notifications.forEach(item => {
+                        const row = document.createElement("div");
+                        row.className = "notif-item" + (item.read ? "" : " unread");
+                        const icon = document.createElement("span");
+                        icon.className = "n-icon"; icon.textContent = icons[item.type] || "🔔";
+                        const avatar = document.createElement("span");
+                        avatar.className = "n-avatar";
+                        avatar.textContent = (item.from || "T")[0].toUpperCase();
+                        const body = document.createElement("div");
+                        body.className = "n-body";
+                        const text = document.createElement("span");
+                        text.textContent = item.text + " ";
+                        const from = document.createElement("span");
+                        from.className = "n-user";
+                        from.textContent = "مشاهده پروفایل";
+                        from.addEventListener("click", () => { if (item.from && item.type !== "approved") openProfile(item.from); });
+                        const time = document.createElement("small");
+                        time.textContent = new Intl.DateTimeFormat("fa-IR", { hour: "2-digit", minute: "2-digit" }).format(new Date(item.createdAt));
+                        body.append(text, item.type !== "approved" ? from : document.createTextNode(""), time);
+                        row.append(icon, avatar, body);
+                        list.append(row);
+                    });
+                    torexRequest("/notifications/read", { method: "POST", body: JSON.stringify({ user: user.username }) }).catch(() => { });
+                } catch (error) { showToast(error.message); }
+            }
+            load();
+        });
+    </script>
+</body>
+
+</html>

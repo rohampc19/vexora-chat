@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>GTA VI News | VEXORA CHAT</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- HEADER -->
+
+
+<header>
+
+
+<div class="logo">
+
+VEXORA CHAT
+
+</div>
+
+
+
+<nav>
+
+
+<a href="index.html">
+خانه
+</a>
+
+
+<a href="news.html" class="active">
+اخبار
+</a>
+
+
+<a href="community.html">
+جامعه
+</a>
+
+
+<a href="chat.html">
+چت
+</a>
+
+
+<a href="login.html">
+ورود
+</a>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+
+
+<!-- NEWS DETAIL -->
+
+
+<section class="news-detail">
+
+
+
+<div class="detail-image">
+
+
+</div>
+
+
+
+
+
+<h1>
+
+آپدیت جدید GTA VI منتشر شد
+
+</h1>
+
+
+
+
+<div class="news-meta">
+
+
+<span>
+
+🎮 GTA VI
+
+</span>
+
+
+<span>
+
+📅 امروز
+
+</span>
+
+
+
+<span>
+
+👁 1250 بازدید
+
+</span>
+
+
+</div>
+
+
+
+
+<p>
+
+
+بازی GTA VI یکی از مورد انتظارترین بازی‌های تاریخ است.
+
+در این خبر جدیدترین اطلاعات، آپدیت‌ها و جزئیات منتشر شده درباره بازی را بررسی می‌کنیم.
+
+
+</p>
+
+
+
+<p>
+
+
+راکستار گیمز با نسخه جدید GTA قصد دارد دنیای بزرگ‌تر، گرافیک بهتر و تجربه‌ای متفاوت برای بازیکنان ایجاد کند.
+
+
+</p>
+
+
+
+
+
+
+<!-- ACTION BUTTONS -->
+
+
+<div class="news-actions">
+
+
+<button onclick="likeNews()">
+
+❤️
+
+<span id="likeCount">
+
+120
+
+</span>
+
+لایک
+
+</button>
+
+
+
+<button onclick="shareNews()">
+
+📤 اشتراک گذاری
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- COMMENTS -->
+
+
+<section class="comments">
+
+
+<h2>
+
+💬 نظرات کاربران
+
+</h2>
+
+
+
+<div class="comment-box">
+
+
+<input 
+type="text"
+id="commentInput"
+placeholder="نظر خودت رو بنویس..."
+>
+
+
+
+<button onclick="addComment()">
+
+ارسال
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="commentsList">
+
+
+
+<div class="comment">
+
+
+<strong>
+
+Roham
+
+</strong>
+
+
+<p>
+
+به نظرم GTA VI بهترین بازی سال میشه 🔥
+
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer>
+
+
+
+<div class="footer-content">
+
+
+
+<div class="footer-logo">
+
+
+<h2>
+
+VEXORA CHAT
+
+</h2>
+
+
+<p>
+
+شبکه اجتماعی گیمرهای ایران
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="footer-links">
+
+
+<h3>
+
+دسترسی سریع
+
+</h3>
+
+
+<a href="index.html">
+خانه
+</a>
+
+
+<a href="news.html">
+اخبار
+</a>
+
+
+<a href="community.html">
+جامعه
+</a>
+
+
+<a href="chat.html">
+چت
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="copyright">
+
+
+© 2026 VEXORA CHAT | تمامی حقوق محفوظ است.
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+
+<script>
+
+
+let likes = 120;
+
+
+
+function likeNews(){
+
+
+likes++;
+
+
+document.getElementById("likeCount").innerHTML = likes;
+
+
+}
+
+
+
+
+
+
+function addComment(){
+
+
+let input = document.getElementById("commentInput");
+
+
+let text = input.value;
+
+
+
+if(text.trim() !== ""){
+
+
+let comment = document.createElement("div");
+
+
+comment.className="comment";
+
+
+
+comment.innerHTML = `
+
+<strong>
+کاربر
+</strong>
+
+<p>
+${text}
+</p>
+
+`;
+
+
+
+document.getElementById("commentsList").appendChild(comment);
+
+
+
+input.value="";
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+function shareNews(){
+
+
+navigator.share({
+
+title:"GTA VI News",
+
+text:"این خبر GTA VI رو ببین 🔥",
+
+url:window.location.href
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

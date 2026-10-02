@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VEXORA CHAT | پروفایل</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+       <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="design-system.css">
+</head>
+
+<body>
+
+
+<!-- =========================
+     BACKGROUND
+========================= -->
+
+<div class="profile-background">
+
+    <div class="profile-glow blue"></div>
+    <div class="profile-glow purple"></div>
+    <div class="profile-glow cyan"></div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="profile-header">
+
+    <div class="profile-header-inner">
+
+        <a href="index.html" class="profile-logo">
+            TOREX <span>PLAY</span>
+        </a>
+
+        <nav class="profile-nav">
+
+            <a href="index.html">خانه</a>
+
+            <a href="news.html">اخبار</a>
+
+            <a href="chat.html">چت</a>
+
+            <a href="chat.html">چت</a>
+
+            <a href="profile.html" class="active">
+                پروفایل
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="profile-container">
+
+
+    <!-- BACK -->
+
+    <a href="javascript:history.back()" class="back-button">
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+        بازگشت به صفحه قبلی
+
+    </a>
+
+
+    <!-- TITLE -->
+
+    <div class="profile-page-title">
+
+        <span>PROFILE SETTINGS</span>
+
+        <h1>پروفایل من</h1>
+
+        <p>
+            پروفایلت رو شخصی‌سازی کن و خودت رو به بقیه گیمرها معرفی کن.
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         PROFILE CARD
+    ========================= -->
+
+    <section class="profile-edit-card">
+
+
+        <div class="profile-edit-cover">
+
+            <div class="cover-light"></div>
+            <div class="cover-pattern"></div>
+
+        </div>
+
+
+        <!-- AVATAR -->
+
+        <div class="avatar-section">
+
+            <div class="profile-avatar-edit">
+
+                <div class="default-avatar" id="avatarPreview">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <span class="avatar-online"></span>
+
+            </div>
+
+
+            <!-- REAL FILE BUTTON -->
+
+            <input
+                type="file"
+                id="profileImageInput"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
+            >
+
+            <button
+                type="button"
+                class="choose-profile-button"
+                id="chooseProfileButton">
+
+                <i class="fa-solid fa-image"></i>
+
+                انتخاب پروفایل
+
+            </button>
+
+        </div>
+
+
+        <!-- PROFILE INFORMATION -->
+
+        <div class="profile-edit-content">
+
+            <div class="edit-section-title">
+
+                <span>PERSONAL INFORMATION</span>
+
+                <h2>اطلاعات پروفایل</h2>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        نام کاربری
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            value="Roham"
+                            id="profileName"
+                            placeholder="نام خود را وارد کنید">
+
+                    </div>
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        نام کاربری سایت
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-hash">
+                            @
+                        </span>
+
+                        <input
+                            type="text"
+                            value="roham"
+                            id="profileUsername"
+                            placeholder="username">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BIO -->
+
+            <div class="form-group full">
+
+                <label>
+                    درباره من
+                </label>
+
+                <textarea
+                    id="profileBio"
+                    placeholder="یک جمله درباره خودت بنویس...">گیمر، عاشق بازی‌های جهان‌باز و دنبال‌کننده دنیای گیم 🎮</textarea>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="edit-actions">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="cancelProfile">
+
+                    انصراف
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="save-button"
+                    id="saveProfile">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    ثبت تغییرات
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FAVORITE GAMES
+    ========================= -->
+
+    <section class="favorite-games-edit">
+
+
+        <div class="edit-section-title">
+
+            <span>GAMING PROFILE</span>
+
+            <h2>
+                🎮 بازی‌های مورد علاقه
+            </h2>
+
+            <p>
+                حداقل ۳ بازی مورد علاقه‌ات را انتخاب کن.
+            </p>
+
+        </div>
+
+
+        <!-- OFFICIAL GAME SELECT -->
+
+        <div class="game-input-box">
+
+            <div class="game-input-title">
+
+                <i class="fa-solid fa-gamepad"></i>
+
+                <div>
+
+                    <strong>
+                        انتخاب بازی
+                    </strong>
+
+                    <span>
+                        فقط بازی‌های موجود در لیست قابل انتخاب هستند.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="game-select-wrapper">
+
+                <select id="gameSelect">
+
+                    <option value="">
+                        یک بازی را انتخاب کنید
+                    </option>
+
+                    <option>GTA V</option>
+                    <option>GTA VI</option>
+                    <option>Red Dead Redemption 2</option>
+                    <option>Minecraft</option>
+                    <option>Fortnite</option>
+                    <option>Counter-Strike 2</option>
+                    <option>Valorant</option>
+                    <option>Call of Duty: Warzone</option>
+                    <option>Call of Duty: Modern Warfare III</option>
+                    <option>Call of Duty: Black Ops 6</option>
+
+                    <option>EA Sports FC 25</option>
+                    <option>EA Sports FC 26</option>
+                    <option>eFootball</option>
+                    <option>Rocket League</option>
+                    <option>NBA 2K25</option>
+
+                    <option>Forza Horizon 5</option>
+                    <option>Forza Motorsport</option>
+                    <option>Need for Speed Heat</option>
+                    <option>Need for Speed Unbound</option>
+                    <option>Gran Turismo 7</option>
+
+                    <option>God of War</option>
+                    <option>God of War Ragnarök</option>
+                    <option>The Last of Us Part I</option>
+                    <option>The Last of Us Part II</option>
+                    <option>Uncharted 4</option>
+
+                    <option>Marvel's Spider-Man Remastered</option>
+                    <option>Marvel's Spider-Man 2</option>
+                    <option>Horizon Zero Dawn</option>
+                    <option>Horizon Forbidden West</option>
+                    <option>Ghost of Tsushima</option>
+
+                    <option>Elden Ring</option>
+                    <option>Dark Souls III</option>
+                    <option>Sekiro: Shadows Die Twice</option>
+                    <option>Black Myth: Wukong</option>
+                    <option>Monster Hunter Wilds</option>
+
+                    <option>The Witcher 3</option>
+                    <option>Cyberpunk 2077</option>
+                    <option>Baldur's Gate 3</option>
+                    <option>Skyrim</option>
+                    <option>Fallout 4</option>
+
+                    <option>Assassin's Creed Shadows</option>
+                    <option>Assassin's Creed Valhalla</option>
+                    <option>Far Cry 6</option>
+                    <option>Watch Dogs 2</option>
+                    <option>Tom Clancy's Rainbow Six Siege</option>
+
+                    <option>Overwatch 2</option>
+                    <option>Apex Legends</option>
+                    <option>League of Legends</option>
+                    <option>Dota 2</option>
+                    <option>Teamfight Tactics</option>
+
+                    <option>Terraria</option>
+                    <option>Roblox</option>
+                    <option>Palworld</option>
+                    <option>ARK: Survival Ascended</option>
+                    <option>Rust</option>
+
+                    <option>Hogwarts Legacy</option>
+                    <option>Resident Evil 4</option>
+                    <option>Resident Evil Village</option>
+                    <option>Dead by Daylight</option>
+                    <option>Phasmophobia</option>
+
+                </select>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+
+            <p class="game-select-note">
+                برای انتخاب چند بازی، هر بازی را جداگانه انتخاب و اضافه کن.
+            </p>
+
+        </div>
+
+
+        <!-- SELECTED -->
+
+        <div class="selected-games-container">
+
+
+            <div class="selected-games-header">
+
+                <div>
+
+                    <span>SELECTED GAMES</span>
+
+                    <h3>
+                        بازی‌های انتخاب‌شده
+                    </h3>
+
+                </div>
+
+
+                <strong id="gameCount">
+                    0 / 3
+                </strong>
+
+            </div>
+
+
+            <div
+                class="selected-games"
+                id="selectedGames">
+
+                <div class="empty-games">
+
+                    <i class="fa-solid fa-gamepad"></i>
+
+                    <p>
+                        هنوز بازی‌ای انتخاب نکردی
+                    </p>
+
+                    <span>
+                        حداقل ۳ بازی انتخاب کن
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- GAME ACTIONS -->
+
+        <div class="game-actions">
+
+            <button
+                type="button"
+                class="cancel-button"
+                id="cancelGames">
+
+                انصراف
+
+            </button>
+
+
+            <button
+                type="button"
+                class="save-button"
+                id="saveGames">
+
+                <i class="fa-solid fa-check"></i>
+
+                ثبت تغییرات
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACCOUNT
+    ========================= -->
+
+    <section class="account-section">
+
+        <div class="edit-section-title">
+
+            <span>ACCOUNT</span>
+
+            <h2>
+                حساب کاربری
+            </h2>
+
+        </div>
+
+
+        <div class="account-options">
+
+
+            <!-- LOGOUT ONLY -->
+
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <div>
+
+                    <strong>
+                        خروج از حساب
+                    </strong>
+
+                    <span>
+                        خروج از VEXORA CHAT
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-left"></i>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================
+     MOBILE NAV
+========================= -->
+
+<nav class="mobile-nav">
+
+    <a href="index.html">
+        خانه
+    </a>
+
+    <a href="news.html">
+        اخبار
+    </a>
+
+    <a href="chat.html">
+        چت
+    </a>
+
+    <a href="chat.html">
+        چت
+    </a>
+
+    <a href="profile.html" class="active">
+        پروفایل
+    </a>
+
+</nav>
+
+
+<script>
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+const chooseProfileButton =
+    document.getElementById("chooseProfileButton");
+
+const profileImageInput =
+    document.getElementById("profileImageInput");
+
+const avatarPreview =
+    document.getElementById("avatarPreview");
+
+
+chooseProfileButton.addEventListener("click", () => {
+
+    profileImageInput.click();
+
+});
+
+
+profileImageInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+
+    if (!file.type.startsWith("image/")) {
+
+        alert("لطفاً فقط یک تصویر انتخاب کن.");
+
+        return;
+
+    }
+
+
+    const reader = new FileReader();
+
+
+    reader.onload = function (event) {
+
+        avatarPreview.innerHTML = "";
+
+        avatarPreview.style.backgroundImage =
+            `url("${event.target.result}")`;
+
+        avatarPreview.style.backgroundSize =
+            "cover";
+
+        avatarPreview.style.backgroundPosition =
+            "center";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+const gameSelect =
+    document.getElementById("gameSelect");
+
+const selectedGames =
+    document.getElementById("selectedGames");
+
+const gameCount =
+    document.getElementById("gameCount");
+
+
+let games = [];
+
+
+/* ADD GAME */
+
+gameSelect.addEventListener("change", function () {
+
+    const game = this.value;
+
+    if (!game) return;
+
+
+    if (games.includes(game)) {
+
+        alert("این بازی قبلاً انتخاب شده.");
+
+        gameSelect.value = "";
+
+        return;
+
+    }
+
+
+    if (games.length >= 10) {
+
+        alert("حداکثر ۱۰ بازی می‌توانی انتخاب کنی.");
+
+        gameSelect.value = "";
+
+        return;
+
+    }
+
+
+    games.push(game);
+
+    renderGames();
+
+    gameSelect.value = "";
+
+});
+
+
+/* RENDER */
+
+function renderGames() {
+
+    gameCount.textContent =
+        `${games.length} / 3`;
+
+
+    if (games.length === 0) {
+
+        selectedGames.innerHTML = `
+
+            <div class="empty-games">
+
+                <i class="fa-solid fa-gamepad"></i>
+
+                <p>
+                    هنوز بازی‌ای انتخاب نکردی
+                </p>
+
+                <span>
+                    حداقل ۳ بازی انتخاب کن
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    selectedGames.innerHTML = "";
+
+
+    games.forEach((game, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "selected-game";
+
+
+        card.innerHTML = `
+
+            <div class="selected-game-icon">
+
+                <i class="fa-solid fa-gamepad"></i>
+
+            </div>
+
+
+            <div class="selected-game-info">
+
+                <strong>
+                    ${game}
+                </strong>
+
+                <span>
+                    بازی مورد علاقه
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="remove-game"
+                data-index="${index}">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        `;
+
+
+        card
+            .querySelector(".remove-game")
+            .addEventListener("click", () => {
+
+                games.splice(index, 1);
+
+                renderGames();
+
+            });
+
+
+        selectedGames.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+document
+    .getElementById("saveProfile")
+    .addEventListener("click", function () {
+
+        alert(
+            "تغییرات پروفایل با موفقیت ثبت شد! 🎮"
+        );
+
+    });
+
+
+/* =====================================================
+   SAVE GAMES
+===================================================== */
+
+document
+    .getElementById("saveGames")
+    .addEventListener("click", function () {
+
+        if (games.length < 3) {
+
+            alert(
+                "برای ثبت تغییرات حداقل ۳ بازی انتخاب کن."
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "torexFavoriteGames",
+            JSON.stringify(games)
+        );
+
+
+        alert(
+            "بازی‌های مورد علاقه با موفقیت ثبت شدند! 🎮"
+        );
+
+    });
+
+
+/* =====================================================
+   CANCEL PROFILE
+===================================================== */
+
+document
+    .getElementById("cancelProfile")
+    .addEventListener("click", function () {
+
+        if (
+            confirm(
+                "تغییرات پروفایل حذف شوند؟"
+            )
+        ) {
+
+            location.reload();
+
+        }
+
+    });
+
+
+/* =====================================================
+   CANCEL GAMES
+===================================================== */
+
+document
+    .getElementById("cancelGames")
+    .addEventListener("click", function () {
+
+        if (
+            confirm(
+                "انتخاب‌های بازی حذف شوند؟"
+            )
+        ) {
+
+            games = [];
+
+            renderGames();
+
+        }
+
+    });
+
+
+/* =====================================================
+   LOAD SAVED GAMES
+===================================================== */
+
+const savedGames =
+    localStorage.getItem(
+        "torexFavoriteGames"
+    );
+
+
+if (savedGames) {
+
+    try {
+
+        games =
+            JSON.parse(savedGames);
+
+        renderGames();
+
+    } catch {
+
+        games = [];
+
+    }
+
+}
+
+
+/* =====================================================
+   REAL LOGOUT
+===================================================== */
+
+document
+    .getElementById("logoutButton")
+    .addEventListener("click", function () {
+
+        const confirmLogout =
+            confirm(
+                "مطمئنی می‌خواهی از حساب خود خارج شوی؟"
+            );
+
+
+        if (!confirmLogout) return;
+
+
+        /*
+           پاک کردن اطلاعات ورود محلی
+        */
+
+        localStorage.removeItem("torexUser");
+
+        localStorage.removeItem("torexLoggedIn");
+
+        localStorage.removeItem("torexFavoriteGames");
+
+
+        /*
+           رفتن به صفحه ورود
+        */
+
+        window.location.href =
+            "login.html";
+
+    });
+
+</script>
+
+<script src="./profile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* Shared VEXORA CHAT interface — loaded after page-specific styles. */
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap");
+:root { --torex-ink:#14111d; --torex-paper:#fffaf1; --torex-wine:#641f3f; --torex-red:#ad3d4e; --torex-gold:#d59b42; --torex-line:rgba(76,42,54,.18); --torex-shadow:0 12px 30px rgba(42,18,29,.13); }
+html { scroll-behavior:smooth; }
+body, body *, button, input, textarea, select { font-family:"Vazirmatn",Tahoma,sans-serif !important; }
+.home-logo, .home-logo span, .footer-brand > a { direction:ltr; unicode-bidi:isolate; display:inline-block; }
+button, .button, [type="submit"], .header-actions a, .gamer-search button { border-radius:8px; border:1px solid rgba(89,35,57,.7); box-shadow:0 2px 0 rgba(56,18,35,.85), 0 7px 16px rgba(56,18,35,.12); font-weight:700; letter-spacing:0; transition:transform .16s ease, box-shadow .16s ease, background .16s ease; }
+button:hover, .button:hover, [type="submit"]:hover, .header-actions a:hover, .gamer-search button:hover { transform:translateY(-2px); box-shadow:0 4px 0 rgba(56,18,35,.85), 0 10px 20px rgba(56,18,35,.16); }
+button:active, .button:active, [type="submit"]:active { transform:translateY(1px); box-shadow:0 1px 0 rgba(56,18,35,.85); }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline:3px solid rgba(213,155,66,.65); outline-offset:3px; }
+.torex-services-link { display:inline-flex !important; align-items:center; gap:6px; }
+.torex-services-link::before { content:"✦"; color:var(--torex-gold); }
+.torex-services-link.active { color:var(--torex-gold) !important; }
+.mobile-nav, .mobile-bottom-nav, .community-mobile-nav, .mobile-chat-nav { box-shadow:0 -7px 20px rgba(42,18,29,.12) !important; border-top:1px solid var(--torex-line) !important; }
+.mobile-nav > a, .mobile-bottom-nav > a, .community-mobile-nav > a, .mobile-chat-nav > a { font-family:"Vazirmatn",Tahoma,sans-serif !important; font-weight:700 !important; }
+.torex-leaderboard { max-width:1180px; margin:0 auto 92px; padding:0 28px; }
+.torex-leaderboard__head { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:22px; }
+.torex-kicker { color:var(--torex-red); font-weight:800; letter-spacing:.08em; font-size:.78rem; }
+.torex-leaderboard h2 { margin:6px 0 0; font-size:clamp(1.45rem,3vw,2.2rem); }
+.torex-players { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.torex-player { display:flex; align-items:center; gap:13px; min-width:0; padding:18px; background:linear-gradient(135deg,#fffdf7,#f4e7d8); border:1px solid var(--torex-line); border-radius:12px; box-shadow:var(--torex-shadow); }
+.torex-player__rank { font-weight:900; color:var(--torex-wine); font-size:1.25rem; }
+.torex-player__avatar { width:42px; height:42px; display:grid; place-items:center; flex:none; border-radius:50%; color:#fff; background:var(--torex-wine); border:3px double #f2c979; }
+.torex-player strong,.torex-player small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.torex-player small { color:#765f69; margin-top:3px; }
+.torex-player__score { margin-right:auto; color:var(--torex-wine); font-weight:900; white-space:nowrap; }
+.torex-club-joined { pointer-events:none; opacity:.76; }
+.torex-club-joined .club-stats span:last-child::after { content:" ✓"; }
+.torex-flame { position:relative; display:inline-grid; place-items:center; width:92px; height:112px; margin:28px auto; color:#ffe4a5; font-size:4.6rem; filter:drop-shadow(0 0 13px #f26322); animation:torex-flame 1.25s ease-in-out infinite alternate; }
+.torex-flame::after { content:""; position:absolute; inset:22px 25px 5px; background:radial-gradient(circle,#fff2bf 0 16%,#ff9f2c 30%,#b62720 72%,transparent 73%); z-index:-1; border-radius:55% 45% 60% 40%; }
+@keyframes torex-flame { from { transform:rotate(-3deg) scale(.94,1.04); } to { transform:rotate(3deg) scale(1.04,.95); } }
+.services-page { min-height:100vh; padding:94px 24px 140px; text-align:center; background:radial-gradient(circle at 50% 15%,#4a1937 0,#211523 45%,#120f18 100%); color:#fff9ee; }
+.services-page__inner { max-width:680px; margin:auto; padding:48px 30px; border:1px solid rgba(240,200,133,.38); border-radius:18px; background:rgba(38,18,31,.62); box-shadow:0 24px 55px rgba(0,0,0,.3); }
+.services-page h1 { margin:0; font-size:clamp(2rem,6vw,4rem); }
+.services-page p { color:#e7d2c5; line-height:2; }
+.services-page a { color:#ffe1a0; font-weight:800; }
+.torex-author { display:flex; align-items:center; gap:9px; margin-top:16px; color:#aeb8c7; font-size:.8rem; }
+.torex-author__avatar { width:30px; height:30px; display:grid; place-items:center; border-radius:50%; background:#213f68; color:#fff; font-weight:900; border:2px solid rgba(255,255,255,.25); }
+.torex-author button { margin-right:auto; padding:5px 10px; color:#f6dfb1; background:transparent; border-color:rgba(235,194,125,.55); box-shadow:none; font-size:.72rem; }
+.torex-author button:hover { box-shadow:none; }
+.torex-news-composer { width:min(780px,92%); margin:0 auto 45px; padding:24px; border:1px solid rgba(126,164,215,.24); border-radius:18px; background:rgba(255,255,255,.045); color:#eef4ff; }
+.torex-news-composer h2 { margin:0 0 5px; font-size:1.22rem; }.torex-news-composer p { margin:0 0 18px; color:#9cabbf; font-size:.82rem; }
+.torex-news-composer input,.torex-news-composer textarea { width:100%; margin:7px 0; padding:12px 14px; color:#eef4ff; background:rgba(6,13,24,.55); border:1px solid rgba(165,189,225,.22); border-radius:9px; font:inherit; }.torex-news-composer textarea { min-height:115px; resize:vertical; }
+.torex-news-composer__row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }.torex-news-composer label { color:#bdcae0; font-size:.8rem; cursor:pointer; }.torex-news-composer [type="file"] { display:none; }.torex-news-composer button { margin-right:auto; padding:10px 17px; background:#7e3152; color:#fff; }
+.torex-profile-dialog { width:min(420px,calc(100% - 32px)); color:#1a1420; border:0; padding:0; border-radius:16px; box-shadow:0 25px 70px rgba(0,0,0,.4); }.torex-profile-dialog::backdrop { background:rgba(5,10,18,.7); backdrop-filter:blur(4px); }.torex-profile-card { padding:30px; text-align:center; background:#fffaf2; }.torex-profile-card__avatar { width:78px; height:78px; display:grid; place-items:center; margin:auto; border-radius:50%; color:#fff; background:#641f3f; border:4px double #e5bb71; font-size:1.8rem; font-weight:900; }.torex-profile-card h2 { margin:12px 0 3px; }.torex-profile-card p { color:#735c67; }.torex-profile-card__stats { display:flex; justify-content:center; gap:24px; margin:23px 0; }.torex-profile-card__stats b,.torex-profile-card__stats span { display:block; }.torex-profile-card__stats span { color:#806d75; font-size:.75rem; }.torex-profile-card button { padding:9px 17px; background:#641f3f; color:#fff; }
+@media (max-width:768px) { body { padding-bottom:78px; } .torex-leaderboard { margin-bottom:55px; padding:0 16px; } .torex-leaderboard__head { align-items:start; flex-direction:column; gap:6px; } .torex-players { grid-template-columns:1fr; } .torex-player { padding:14px; } .services-page { padding:60px 16px 100px; } .services-page__inner { padding:35px 20px; } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+.torex-verified { display:inline-grid; place-items:center; width:17px; height:17px; border-radius:50%; color:#fff; background:#3787dd; font-size:.7rem; vertical-align:middle; }
+.torex-openable { cursor:pointer; }.torex-openable:focus-visible { outline:3px solid #d59b42; outline-offset:4px; }
+.torex-news-dialog { width:min(760px,calc(100% - 28px)); max-height:90vh; padding:0; color:#edf3fd; border:1px solid rgba(139,180,235,.25); border-radius:18px; background:#101927; }.torex-news-dialog::backdrop { background:rgba(3,8,14,.76); backdrop-filter:blur(5px); }.torex-news-detail { position:relative; padding:34px; }.torex-news-detail>img { width:100%; max-height:330px; margin-bottom:22px; border-radius:12px; object-fit:cover; }.torex-news-detail h2 { color:#fff; font-size:clamp(1.4rem,4vw,2.2rem); line-height:1.8; }.torex-news-detail>p { color:#b8c6d9; line-height:2.1; }.torex-news-tags { display:flex; flex-wrap:wrap; gap:7px; }.torex-news-tags span { color:#8fc2ff; }.torex-dialog-close { position:absolute; top:14px; left:14px; z-index:1; width:34px; height:34px; color:#fff; background:#243246; font-size:1.45rem; line-height:1; }
+.torex-image-preview { width:100%; max-height:230px; margin-top:12px; border-radius:9px; object-fit:cover; }.torex-upload-control { display:inline-flex; align-items:center; padding:9px 12px; border:1px dashed rgba(178,206,247,.5); border-radius:8px; }.torex-toast-container { position:fixed; z-index:3000; left:18px; bottom:92px; display:grid; gap:8px; max-width:min(360px,calc(100% - 36px)); }.torex-toast { padding:12px 15px; color:#fff; background:#1d3049; border:1px solid rgba(163,207,255,.35); border-radius:9px; box-shadow:0 10px 28px rgba(0,0,0,.25); opacity:0; transform:translateY(8px); transition:.18s ease; }.torex-toast.is-visible { opacity:1; transform:translateY(0); }
+.torex-event-joined { outline:2px solid #d59b42; outline-offset:3px; }
+@media (max-width:700px) { .torex-news-detail { padding:24px 18px; }.torex-news-composer { width:calc(100% - 24px); padding:18px; }.torex-news-composer__row button { width:100%; margin-right:0; }.torex-toast-container { right:12px; left:12px; max-width:none; }.torex-profile-card__stats { gap:13px; } }
+
+/* =========================================================
+   TOREX UI — بخش ۲ (تعمیر ظاهر، فونت و تم تیره)
+   ========================================================= */
+
+/* تم تیره‌ی یکپارچه برای همه‌ی صفحات (رفع مشکل کلمات سیاه/محو) */
+
+body { background:#08090d !important; color:#eef1f8; }
+
+/* مدرن‌سازی فضا: فاصله، کارت‌ها و ریسپانسیو */
+main, .page, .content, section { max-width: 1180px; margin-inline: auto; padding-inline: clamp(14px, 3vw, 32px); }
+input, textarea, select, button { border-radius: 12px !important; }
+input, textarea, select { padding: 11px 14px; transition: border-color .2s, box-shadow .2s; }
+input:focus, textarea:focus { outline: none; border-color: rgba(79,140,255,.55); box-shadow: 0 0 0 3px rgba(79,140,255,.18); }
+
+/* حذف مربع‌ها/گرید پس‌زمینه در همه صفحات */
+.grid-bg, .bg-grid, .background-grid, .pattern-grid,
+[class*="grid-lines"], [class*="square"], [class*="pattern"] {
+  background-image: none !important;
+}
+body::before, body::after { background-image: none !important; content: none; }
+
+@media (max-width: 768px) {
+  main, .page, .content, section { width: 100%; padding-inline: 14px; }
+  h1 { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .torex-news-detail { padding: 20px 14px; }
+  .services-page__inner { padding: 26px 16px; }
+}
+
+.torex-news-tags span { background:rgba(79,140,255,.1); border:1px solid rgba(79,140,255,.28); padding:3px 10px; border-radius:20px; font-size:.75rem; }
+
+/* --- ناوبری اسلیم صفحات داخلی (بدون لوگوی VEXORA CHAT) --- */
+
+.slim-nav {
+  position: sticky; top: 0; z-index: 900;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 60px; padding: 8px 20px;
+  background: rgba(8, 9, 13, 0.78);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border, rgba(255,255,255,.09));
+}
+.slim-nav__back { color:#aeb8c9; font-size:.85rem; font-weight:700; transition:color .2s; }
+.slim-nav__back:hover { color:#fff; }
+.slim-nav .site-nav { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.slim-nav .site-nav a { padding:7px 13px; border-radius:11px; color:#9499aa; font-size:.82rem; font-weight:600; transition:.2s; }
+.slim-nav .site-nav a:hover { color:#fff; background:rgba(255,255,255,.06); }
+.slim-nav .site-nav a.active { color:#fff; background:rgba(79,140,255,.14); }
+
+/* --- نوار پایین ثابت: در همه‌ی دستگاه‌ها حذف شده --- */
+
+.mobile-nav, .mobile-bottom-nav, .community-mobile-nav, .mobile-chat-nav {
+  display: none !important;
+}
+body { padding-bottom: 0 !important; }
+
+/* =========================================================
+   صفحه جزئیات خبر — سبک اینستاگرام
+   ========================================================= */
+
+.news-detail-page { padding: 34px 16px 140px; }
+
+.insta-post {
+  width: min(680px, 94%); margin: 0 auto;
+  background: #11131a; border: 1px solid rgba(255,255,255,.09);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+}
+
+.insta-post__header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.07); }
+.insta-post__author { display:flex; align-items:center; gap:11px; background:transparent; border:none; box-shadow:none; padding:0; cursor:pointer; }
+.insta-post__author:hover { transform:none; box-shadow:none; }
+.insta-post__avatar { width:42px; height:42px; font-size:1.05rem; border:2px solid #4f8cff; background:linear-gradient(135deg,#4f8cff,#8b5cf6); }
+.insta-post__names { display:grid; text-align:right; }
+.insta-post__names strong { color:#fff; font-size:.92rem; display:flex; align-items:center; gap:5px; }
+.insta-post__names small { color:#8d93a5; font-size:.74rem; }
+
+.insta-follow { padding:8px 18px; font-size:.8rem; background:linear-gradient(135deg,#4f8cff,#8b5cf6); color:#fff; border:none; box-shadow:none; }
+.insta-follow.following { background:rgba(255,255,255,.08); color:#c9d2e4; border:1px solid rgba(255,255,255,.16); }
+
+.insta-post__image { aspect-ratio: 16/9; display:grid; place-items:center; background:linear-gradient(135deg,#171a24,#10131b); color:#39405a; font-size:3rem; }
+.insta-post__image img { width:100%; height:100%; object-fit:cover; }
+
+.insta-post__actions { display:flex; align-items:center; gap:18px; padding:13px 18px 4px; }
+.insta-post__actions button { display:flex; align-items:center; gap:7px; background:transparent; border:none; box-shadow:none; color:#c3cad9; font-size:1.25rem; padding:4px; cursor:pointer; transition:.2s; }
+.insta-post__actions button:hover { transform:scale(1.12); box-shadow:none; }
+.insta-post__actions button span { font-size:.85rem; font-weight:700; color:#eef1f8; }
+#likeButton.liked { color:#ff304f; }
+#likeButton.liked i { filter:drop-shadow(0 0 8px rgba(255,48,79,.6)); }
+.insta-post__profile-btn { margin-right:auto; font-size:.78rem !important; color:#8d93a5 !important; }
+.insta-post__profile-btn:hover { color:#fff !important; }
+
+.insta-post__body { padding:12px 18px 18px; }
+.insta-post__body h1 { color:#fff; font-size:clamp(1.25rem,3.4vw,1.7rem); line-height:1.9; margin:8px 0; }
+.insta-post__body p { color:#b9c2d4; line-height:2.1; white-space:pre-wrap; }
+.insta-post__body time { display:block; margin-top:14px; color:#6d7386; font-size:.74rem; }
+
+.insta-comments { border-top:1px solid rgba(255,255,255,.07); padding:16px 18px 20px; }
+.insta-comments h2 { color:#fff; font-size:1rem; margin-bottom:12px; }
+.insta-comments__list { display:grid; gap:14px; margin-bottom:16px; max-height:340px; overflow-y:auto; }
+.insta-comments__empty { color:#7b8194; font-size:.85rem; text-align:center; padding:18px 0; }
+.insta-comment { display:flex; gap:11px; align-items:flex-start; }
+.insta-comment .torex-author__avatar { margin-top:2px; }
+.insta-comment strong { display:block; color:#fff; font-size:.85rem; }
+.insta-comment p { color:#c3cad9; font-size:.88rem; line-height:1.9; }
+.insta-comment small { color:#6d7386; font-size:.7rem; }
+
+.insta-comment-form { display:flex; gap:10px; }
+.insta-comment-form input { flex:1; padding:11px 14px; color:#eef1f8; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:12px; font:inherit; font-size:.86rem; }
+.insta-comment-form input:focus { outline:none; border-color:rgba(79,140,255,.6); box-shadow:0 0 16px rgba(79,140,255,.14); }
+.insta-comment-form button { padding:10px 20px; font-size:.82rem; background:linear-gradient(135deg,#4f8cff,#8b5cf6); color:#fff; border:none; box-shadow:none; }
+
+@media (max-width:600px) {
+  .news-detail-page { padding:18px 10px 40px; }
+  .slim-nav { flex-wrap:wrap; }
+  .insta-post__actions { gap:13px; }
+}
+
+/* نتایج جستجوی کاربر (جامعه) */
+
+.torex-search-results { width:100%; margin-top:16px; display:grid; gap:10px; }
+.torex-search-row { display:flex; align-items:center; gap:12px; padding:13px 16px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09); border-radius:14px; transition:.2s; }
+.torex-search-row:hover { background:rgba(79,140,255,.08); border-color:rgba(79,140,255,.3); }
+.torex-search-info { display:grid; min-width:0; flex:1; text-align:right; }
+.torex-search-info strong { color:#fff; font-size:.9rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.torex-search-info small { color:#8d93a5; font-size:.74rem; direction:ltr; }
+.torex-search-row button { margin-right:auto; padding:7px 15px; font-size:.78rem; background:rgba(79,140,255,.15); color:#a9c6ff; border:1px solid rgba(79,140,255,.35); box-shadow:none; }
+.torex-search-empty { color:#8d93a5; font-size:.85rem; text-align:center; padding:14px; background:rgba(255,255,255,.03); border-radius:12px; }
+
+/* نتیجه جستجو در چت — کلیک‌پذیر */
+.search-result { cursor:pointer; transition:.2s; }
+.search-result:hover { border-color:rgba(79,140,255,.45); }

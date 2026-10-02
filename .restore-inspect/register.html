@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ساخت حساب | VEXORA CHAT</title>
+
+    <!-- FONT -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./design-system.css">
+    <link
+        rel="stylesheet"
+        href="register.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="register-background">
+
+        <div class="register-glow glow-one"></div>
+
+        <div class="register-glow glow-two"></div>
+
+        <div class="register-glow glow-three"></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="register-header">
+
+        <a
+            href="welcome.html"
+            class="register-logo"
+        >
+            TOREX
+            <span>PLAY</span>
+        </a>
+
+
+        <a
+            href="welcom.html"
+            class="back-button"
+        >
+            بازگشت
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="register-main">
+
+
+        <section class="register-card">
+
+
+            <!-- BRAND -->
+
+            <div class="register-brand">
+
+                <div class="brand-icon">
+                    TP
+                </div>
+
+
+                <h1>
+                    ساخت حساب
+                </h1>
+
+
+                <p>
+                    به جامعه گیمرهای
+                    <strong>VEXORA CHAT</strong>
+                    بپیوند!
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================
+                 REGISTER FORM
+            ====================== -->
+
+            <form
+                class="register-form"
+                id="registerForm"
+                novalidate
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="input-group">
+
+                    <label for="username">
+                        نام کاربری
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="مثلاً Roham"
+                        maxlength="20"
+                        autocomplete="username"
+                        required
+                    >
+
+
+                    <small>
+                        نام کاربری باید حداقل ۳ کاراکتر باشد.
+                    </small>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="input-group">
+
+                    <label for="phone">
+                        شماره موبایل
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="09123456789"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        maxlength="11"
+                        required
+                    >
+
+
+                    <small>
+                        شماره باید با 09 شروع شود.
+                    </small>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="password">
+                        رمز عبور
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="حداقل ۸ کاراکتر"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="confirmPassword">
+                        تکرار رمز عبور
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="رمز عبور را دوباره وارد کنید"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                    >
+
+                    <span>
+                        قوانین و شرایط VEXORA CHAT را می‌پذیرم.
+                    </span>
+
+                </label>
+
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="registerError"
+                    class="register-error"
+                    role="alert"
+                ></div>
+
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-submit"
+                >
+
+                    <span>
+                        ساخت حساب
+                    </span>
+
+                    <b>
+                        ←
+                    </b>
+
+                </button>
+
+
+
+                <!-- LOGIN -->
+
+                <div class="login-text">
+
+                    قبلاً حساب ساختی؟
+
+                    <a href="login.html">
+                        وارد شو
+                    </a>
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="register-footer">
+
+        <div>
+            VEXORA CHAT
+        </div>
+
+        <p>
+            ساخته شده برای گیمرها، توسط گیمرها 🎮
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const phoneInput =
+            document.getElementById("phone");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const confirmPasswordInput =
+            document.getElementById("confirmPassword");
+
+        const termsInput =
+            document.getElementById("terms");
+
+        const registerError =
+            document.getElementById("registerError");
+
+
+
+        // ============================
+        // ERROR
+        // ============================
+
+        function showError(message) {
+
+            registerError.textContent = message;
+
+            registerError.classList.add("show");
+
+        }
+
+
+        function hideError() {
+
+            registerError.textContent = "";
+
+            registerError.classList.remove("show");
+
+        }
+
+
+
+        // ============================
+        // PHONE
+        // ============================
+
+        function isValidPhone(phone) {
+
+            const phoneRegex =
+                /^09[0-9]{9}$/;
+
+            return phoneRegex.test(phone);
+
+        }
+
+
+
+        // ============================
+        // FORM
+        // ============================
+
+        registerForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                hideError();
+
+
+                const username =
+                    usernameInput.value.trim();
+
+                const phone =
+                    phoneInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+                const confirmPassword =
+                    confirmPasswordInput.value;
+
+
+
+                // USERNAME
+
+                if (username.length < 3) {
+
+                    showError(
+                        "نام کاربری باید حداقل ۳ کاراکتر باشد."
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+
+                }
+
+
+
+                // PHONE
+
+                if (!isValidPhone(phone)) {
+
+                    showError(
+                        "شماره موبایل معتبر نیست. مثال: 09123456789"
+                    );
+
+                    phoneInput.focus();
+
+                    return;
+
+                }
+
+
+
+                // PASSWORD
+
+                if (password.length < 8) {
+
+                    showError(
+                        "رمز عبور باید حداقل ۸ کاراکتر باشد."
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+
+                }
+
+
+
+                // CONFIRM PASSWORD
+
+                if (password !== confirmPassword) {
+
+                    showError(
+                        "رمز عبور و تکرار آن یکسان نیست."
+                    );
+
+                    confirmPasswordInput.focus();
+
+                    return;
+
+                }
+
+
+
+                // TERMS
+
+                if (!termsInput.checked) {
+
+                    showError(
+                        "برای ساخت حساب باید قوانین سایت را بپذیری."
+                    );
+
+                    return;
+
+                }
+
+
+
+                // ==========================
+                // SUCCESS - TEMPORARY
+                // ==========================
+
+                /*
+                    فعلاً فقط برای تست است.
+
+                    بعداً اطلاعات به Backend
+                    و Database ارسال می‌شود.
+                */
+
+
+                localStorage.setItem(
+                    "torex_pending_user",
+                    JSON.stringify({
+
+                        username: username,
+
+                        phone: phone,
+
+                        status: "pending"
+
+                    })
+                );
+
+
+                // پیام موفقیت
+
+                registerError.textContent =
+                    "حساب شما با موفقیت ثبت شد و در انتظار تأیید مدیریت است.";
+
+                registerError.classList.add("success");
+
+
+
+                // بعد از 2 ثانیه
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "login.html";
+
+                }, 2000);
+
+            }
+        );
+
+
+
+        // ============================
+        // ONLY NUMBERS
+        // ============================
+
+        phoneInput.addEventListener(
+            "input",
+            function() {
+
+                this.value =
+                    this.value.replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+            }
+        );
+
+
+
+        // ============================
+        // HIDE ERROR
+        // ============================
+
+        usernameInput.addEventListener(
+            "input",
+            hideError
+        );
+
+        phoneInput.addEventListener(
+            "input",
+            hideError
+        );
+
+        passwordInput.addEventListener(
+            "input",
+            hideError
+        );
+
+        confirmPasswordInput.addEventListener(
+            "input",
+            hideError
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+
