@@ -1,9 +1,63 @@
-node_modules/
-dist/
+# ============================================
+# VEXORA CHAT - .gitignore
+# ============================================
+
+# Environment & Secrets
 .env
-.env.*
-!.env.example
-uploads/
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+logs/
 *.log
+npm-debug.log*
+
+# Database
+*.sqlite
+*.db
+
+# Uploads (user content)
+uploads/*
+!uploads/.gitkeep
+
+# OS Files
 .DS_Store
+Thumbs.db
+desktop.ini
+$null
+
+# IDE
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+coverage/
+
+# Old backups (never again!)
+*.zip
+*.rar
+*.tar.gz
+*.b64
+*.backup
+*.err
+torex-play/
+
+# Prisma
+prisma/migrations/dev.db*
+
+# Docker
+docker-compose.override.yml
+
+# SSL Certificates (keep them secure, not in repo)
+ssl/*.pem
+ssl/*.key

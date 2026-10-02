@@ -23,7 +23,10 @@ export function registerChat(io){
   io.on('connection',socket=>{
     const u=socket.user;
     let windowStarted=Date.now(),sentInWindow=0;
+    let typingWindowStarted=Date.now(),typingEvents=0;
     const allowMessage=()=>{const now=Date.now();if(now-windowStarted>=10000){windowStarted=now;sentInWindow=0}if(sentInWindow>=12)return false;sentInWindow+=1;return true};
+    const allowTyping=()=>{const now=Date.now();if(now-typingWindowStarted>=10000){typingWindowStarted=now;typingEvents=0}if(typingEvents>=30)return false;typingEvents+=1;return true};
+
     socket.join(`user:${u.username}`);
     Presence.findOneAndUpdate({username:u.username},{online:true,lastSeen:new Date()},{upsert:true,new:true}).catch(()=>{});
     io.emit('presence:update',{username:u.username,online:true});
@@ -49,11 +52,13 @@ export function registerChat(io){
 
     socket.on('chat:private:history',async({withUser,before,limit=30}={})=>{
       try{
+        if(!allowMessage())throw new Error('تعداد درخواست‌های چت در این لحظه زیاد است؛ چند ثانیه بعد دوباره تلاش کن.');
         const target=await approvedUser(withUser);if(!target)throw new Error('کاربر پیدا نشد.');
         const q={conversationKey:key(u.username,target.username)};
         if(before)q.createdAt={$lt:new Date(before)};
-        const rows=await Message.find(q).sort({createdAt:-1}).limit(Math.min(Math.max(Number(limit)||30,1),50)).lean();
-        socket.emit('chat:history',{items:rows.reverse(),hasMore:rows.length===Math.min(Math.max(Number(limit)||30,1),50)});
+        const safe=Math.min(Math.max(Number(limit)||30,1),50);
+        const rows=await Message.find(q).sort({createdAt:-1}).limit(safe).lean();
+        socket.emit('chat:history',{items:rows.reverse(),hasMore:rows.length===safe});
       }catch(e){socket.emit('chat:error',{message:e.message||'تاریخچه در دسترس نیست.'})}
     });
 
@@ -76,7 +81,7 @@ export function registerChat(io){
 
     socket.on('group:history',async({groupId,before,limit=30}={})=>{
       try{
-        if(!allowMessage())throw new Error('تعداد پیام‌ها در این لحظه زیاد است؛ چند ثانیه بعد دوباره تلاش کن.');
+        if(!allowMessage())throw new Error('تعداد درخواست‌های چت در این لحظه زیاد است؛ چند ثانیه بعد دوباره تلاش کن.');
         if(!(await allowedGroup(u.sub,groupId)))throw new Error('عضویت تأییدشده نیست.');
         const q={groupId:String(groupId)};
         if(before)q.createdAt={$lt:new Date(before)};
@@ -98,13 +103,13 @@ export function registerChat(io){
     });
 
     socket.on('typing',async({to,isTyping}={})=>{
-      const target=await approvedUser(to).catch(()=>null);
-      if(target)io.to(`user:${target.username}`).emit('typing',{from:u.username,isTyping:!!isTyping});
+      try{
+        if(!allowTyping())return;
+        const target=await approvedUser(to);
+        if(target)io.to(`user:${target.username}`).emit('typing',{from:u.username,isTyping:!!isTyping});
+      }catch{}
     });
 
-    socket.on('disconnect',()=>{
-      Presence.findOneAndUpdate({username:u.username},{online:false,lastSeen:new Date()}).catch(()=>{});
-      io.emit('presence:update',{username:u.username,online:false});
-    });
+    socket.on('disconnect',()=>{Presence.findOneAndUpdate({username:u.username},{online:false,lastSeen:new Date()}).catch(()=>{});io.emit('presence:update',{username:u.username,online:false});});
   });
 }
